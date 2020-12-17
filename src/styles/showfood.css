@@ -343,10 +343,12 @@
 	height: 100%;
 }
 
-@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
+@media (min-width: 320px) and (max-width: 480px) {
 	.food-wrapper,
 	.food-wrapper1 {
-		padding: 15px;
+		padding: 0 15px;
+		margin-top: 0px;
 	}
 
 	.btn-navigate__back,
@@ -407,7 +409,8 @@
 	}
 }
 
-@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+@media (min-width: 481px) and (max-width: 768px) {
 	.food-wrapper,
 	.food-wrapper1 {
 		padding: 15px;

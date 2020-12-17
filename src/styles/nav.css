@@ -116,10 +116,11 @@ ul.nav-content::before {
 	}
 }
 
-@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
-	.container {
+/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
+@media (min-width: 320px) and (max-width: 480px) {
+	/* .container {
 		width: auto;
-	}
+	} */
 
 	.logo {
 		position: absolute;
@@ -166,9 +167,9 @@ ul.nav-content::before {
 		z-index: 999999;
 		border-radius: 10px;
 		opacity: 1;
-		background: linear-gradient(-45deg,#fff,lavender,whitesmoke,#f8e9e7);
+		background: linear-gradient(-45deg, #fff, lavender, whitesmoke, #f8e9e7);
 		background-size: 400% 400%;
-		animation: gradient 5s ease infinite; 
+		animation: gradient 5s ease infinite;
 	}
 
 	.favlist a {
@@ -176,10 +177,11 @@ ul.nav-content::before {
 	}
 }
 
-@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
-	/* .container {
+/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+@media (min-width: 481px) and (max-width: 768px) {
+	.container {
 		width: auto;
-	} */
+	}
 
 	.logo {
 		position: absolute;
@@ -225,9 +227,9 @@ ul.nav-content::before {
 		border-radius: 10px;
 		opacity: 1;
 		transition: width .3s, height .3s, opacity .1s;
-		background: linear-gradient(-45deg,#fff,lavender,whitesmoke,#f8e9e7);
+		background: linear-gradient(-45deg, #fff, lavender, whitesmoke, #f8e9e7);
 		background-size: 400% 400%;
-		animation: gradient 5s ease infinite; 
+		animation: gradient 5s ease infinite;
 	}
 
 	.favlist a {

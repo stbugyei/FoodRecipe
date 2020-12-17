@@ -61,7 +61,6 @@
 	animation: typing 2s linear;
 }
 
-
 .blockquote h4,
 .blockquote1 h4 {
 	position: relative;
@@ -153,7 +152,8 @@
 	padding-top: 30px;
 }
 
-@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
+@media (min-width: 320px) and (max-width: 480px) {
 	.form-wrapper {
 		width: 100%;
 	}
@@ -165,6 +165,10 @@
 	.blockquote h2,
 	.blockquote1 h2 {
 		line-height: inherit;
+		font-size: 14px;
+	}
+
+	.typetext{
 		font-size: 16px;
 	}
 
@@ -184,18 +188,15 @@
 		padding-top: 50px;
 	}
 
-	.typetext,
-	.blockquote h2 {
-		font-size: 15px;
-	}
 
-	.blockquote h4, .blockquote1 h4 {
+	.blockquote h4,
+	.blockquote1 h4 {
 		padding-top: 10px;
 	}
-
 }
 
-@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+@media (min-width: 481px) and (max-width: 768px) {
 	.nav-wrapper {
 		left: 2%;
 		width: 100%;
@@ -206,10 +207,10 @@
 		font-size: 16px;
 	}
 
-	.blockquote h4, .blockquote1 h4 {
+	.blockquote h4,
+	.blockquote1 h4 {
 		padding-top: 0px;
 	}
-
 
 	.query {
 		padding-top: 40px;

@@ -88,7 +88,7 @@
 	border: 2px solid #ff5550;
 	border-radius: 5px;
 	color: #ff5550;
-    text-shadow: -1px 0px 0px #ff5550;
+	text-shadow: -1px 0px 0px #ff5550;
 	box-shadow: 0px 10px 14px -13px rgb(254, 102, 125);
 	-webkit-animation: btnzoom .5s;
 	animation: btnzoom .5s;
@@ -124,13 +124,14 @@
 	display: none;
 }
 
-@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
+@media (min-width: 320px) and (max-width: 480px) {
 	.welcome-content {
 		width: 100%;
 	}
 
 	.welcome-text__content {
-		padding: 30px;
+		padding: 10px;
 		font-size: 15px;
 		border-radius: 5px;
 		background-image: none;
@@ -168,7 +169,8 @@
 	}
 }
 
-@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+@media (min-width: 481px) and (max-width: 768px) {
 	.welcome-content {
 		width: 95%;
 	}

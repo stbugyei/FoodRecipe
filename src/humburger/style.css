@@ -15,7 +15,7 @@
 	top: -12px;
 	right: -12px;
 	width: 75px;
-	height: 65px; 
+	height: 65px;
 	max-height: 370px;
 	z-index: -1000;
 	background: transparent;
@@ -32,7 +32,7 @@
 	right: -12px;
 	width: 75px;
 	height: 65px;
-	max-height: 370px; 
+	max-height: 370px;
 	z-index: -1000;
 	border-bottom-left-radius: 100%;
 	background: linear-gradient(90deg, rgba(254, 110, 124, 1) 0%, rgba(255, 161, 118, 1) 136%);
@@ -145,14 +145,14 @@
 	}
 }
 
- @keyframes backgroundClose1 {
+@keyframes backgroundClose1 {
 	0% {
 		transform: scale(11);
 	}
 	100% {
 		transform: scale(1);
 	}
-} 
+}
 
 @keyframes backgroundExpand {
 	100% {
@@ -172,7 +172,8 @@
 	}
 }
 
-@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+@media (min-width: 481px) and (max-width: 768px) {
 	.menu-background {
 		transform: scale(1);
 		animation: backgroundClose1 .3s;
