@@ -1,0 +1,186 @@
+ul.random-list__card {
+	position: relative;
+	width: 50%;
+	padding: 15px;
+	transition: all .3s;
+	list-style: none;
+}
+
+.btn-random__pick,
+.btn-random__pick1 {
+	position: absolute;
+	top: -2.6%;
+	left: 77%;
+	width: 77%;
+	font-size: 18px;
+	line-height: 2rem;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	color: #fff;
+	background: linear-gradient(90deg, rgba(254, 110, 124, 1) 0%, rgba(255, 161, 118, 1) 136%);
+	box-shadow: 0px 10px 14px -14px rgb(254, 102, 125);
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+	transition: all .2s;
+}
+
+.btn-random__pick1 {
+	background-image: linear-gradient(to top, #cc208e 0%, #980369 100%);
+}
+
+.random-list__poster {
+	width: 100%;
+	padding-top: 20px;
+	border-radius: 50%;
+}
+
+.random-list__poster img {
+	width: 100%;
+	min-height: 100px;
+	border: 5px double whitesmoke;
+	object-fit: cover;
+	border-radius: 50%;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .09);
+}
+
+.optional-image {
+	width: 100%;
+	min-height: 100%;
+	border: 6px double #fff;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 4px double #f5f5f5;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .09);
+}
+
+.category {
+	font-size: 18px;
+	display: block;
+	position: absolute;
+	left: 17px;
+	top: -2%;
+	padding: 0px 5px;
+	border-radius: 3px;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+}
+
+.random-title {
+	font-size: 18px;
+	text-transform: capitalize;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+}
+
+.btn-random, .btn-random1 {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    margin-top: 5px;
+    line-height: 2rem;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #ff5550;
+    color: #ff5550;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0px 10px 14px -10px rgb(254, 102, 67);
+    /* text-shadow: 0 3px 50px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23); */
+    background-color: transparent;
+    transition: all .2s;
+    text-shadow: 0px 0px 0px #ff5550;
+}
+
+.btn-random1  {
+	border: 2px solid #980369;
+	color: #980369;
+	border-radius: 5px;
+	text-decoration: none;
+	box-shadow: 0px 10px 14px -10px#980369;
+}
+
+.btn-random:hover {
+	box-shadow: none;
+	text-shadow: none;
+	border-color: #444;
+	color: #444;
+}
+
+.btn-random1:hover {
+	box-shadow: none;
+	color: #61045f;
+	border-color: #61045f;
+}
+
+@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+	.random-list__poster {
+		width: 35%;
+		padding-top: 40px;
+		border-radius: 50%;
+	}
+
+	.random-list__poster img {
+		border: 2px solid #ffffff;
+	}
+
+	ul.random-list__card {
+		width: 100%;
+		padding: 0px 10px 0px 10px;
+		margin: 0px 0px -57px 0px;
+	}
+
+	ul.random-list__card p {
+		position: absolute;
+		top: 50px;
+		right: 0;
+		width: 135px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	.btn-random__pick, .btn-random__pick1 {
+		width: 100%;
+		left: 0;
+		top: 0;
+		padding-right: 5px;
+		color: #fff;
+		line-height: 2rem;
+		text-align: right;
+	}
+
+	.category {
+		position: absolute;
+		left: 0px;
+		top: 2%;
+		padding: 0px 5px;
+		color: #fff;
+	}
+
+	.btn-random, .btn-random1 {
+		width: 100%;
+		font-size: 15px;
+		margin-top: 5px;
+		line-height: 1.5rem;
+		position: absolute;
+		top: 50%;
+		width: 60%;
+		right: 0;
+	}
+
+	.category {
+		top: 2%;
+	}
+}
+
+@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+	.btn-random__pick, .btn-random__pick1 {
+		left: 81%;
+		top: -4.5%;
+	}
+
+	.category {
+		top: -4%;
+	}
+}

@@ -1,0 +1,133 @@
+.main-wrapper {
+	position: absolute;
+	width: 100%;
+	padding: 0px 100px 70px 100px;
+	border-radius: 6px;
+	list-style: none;
+	z-index: -1;
+	animation: fade 1s;
+}
+
+.outer-main__section,
+.outer-main__section1 {
+	position: relative;
+	width: 100%;
+	background-color: whitesmoke;
+	border-radius: 6px;
+}
+
+.outer-main__section::before,
+.outer-main__section1::before {
+	content: "";
+	position: absolute;
+	top: 11%;
+	right: 0;
+	width: 26%;
+	height: 80%;
+	-webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;
+	background: linear-gradient(90deg, rgba(254, 110, 124, 1) 0%, rgba(255, 161, 118, 1) 136%);
+}
+
+.outer-main__section1::before {
+	background-image: linear-gradient(to top, #cc208e 0%, #980369 100%);
+}
+
+.inner-main__section {
+	position: relative;
+	width: 100%;
+	padding: 10px;
+	border-radius: 6px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.inner-main__section1 {
+	position: relative;
+	width: 100%;
+	padding: 10px 10px 10px 100px;
+	border-radius: 6px;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.09);
+}
+
+.inner-main__section p {
+	padding: 10px;
+	float: left;
+}
+
+.random-wrapper {
+	position: relative;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+}
+
+.search-wrapper {
+	position: absolute;
+	width: 100%;
+	list-style: none;
+}
+
+@media only screen and (min-device-width: 20em) and (max-device-width: 30em) {
+	.container {
+		width: auto;
+	}
+
+	.main-wrapper {
+		padding: initial;
+	}
+
+	.outer-main__section,
+	.outer-main__section1 {
+		border-top-right-radius: 0px;
+		border-top-left-radius: 0px;
+		/* margin-top: 20px; */
+	}
+
+	.outer-main__section::before,
+	.outer-main__section1::before {
+		display: none;
+	}
+
+	.random-wrapper {
+		width: 100%;
+	}
+
+	.inner-main__section1 {
+		flex-direction: column-reverse;
+		padding: 10px;
+	}
+
+}
+
+@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+	.container {
+		width: auto;
+	}
+
+	.main-wrapper {
+		padding: initial;
+	}
+
+	.outer-main__section,
+	.outer-main__section1 {
+		border-radius: 0px;
+	}
+
+	.outer-main__section::before,
+	.outer-main__section1::before {
+		top: 20%;
+	}
+
+	.inner-main__section1 {
+		padding: 15px;
+		border-radius: 50px;
+	}
+
+
+}

@@ -1,0 +1,186 @@
+.humburger-content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 46px;
+	height: 32px;
+	cursor: pointer;
+	border: 2px solid transparent;
+	background: transparent;
+}
+
+.close-background {
+	position: absolute;
+	top: -12px;
+	right: -12px;
+	width: 75px;
+	height: 65px; 
+	max-height: 370px;
+	z-index: -1000;
+	background: transparent;
+	background: linear-gradient(90deg, rgba(254, 110, 124, 1) 0%, rgba(255, 161, 118, 1) 136%);
+	transform-origin: right top;
+	transform: scale(5.7);
+	animation: backgroundExpand .3s;
+	outline: none;
+}
+
+.menu-background {
+	position: absolute;
+	top: -12px;
+	right: -12px;
+	width: 75px;
+	height: 65px;
+	max-height: 370px; 
+	z-index: -1000;
+	border-bottom-left-radius: 100%;
+	background: linear-gradient(90deg, rgba(254, 110, 124, 1) 0%, rgba(255, 161, 118, 1) 136%);
+	transform-origin: right top;
+	transform: scale(1);
+	animation: backgroundClose .3s;
+	outline: none;
+}
+
+.hamburger-item,
+.hamburger-items {
+	position: relative;
+	width: 30px;
+	height: 19px;
+	cursor: pointer;
+	border-radius: 2px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	background: transparent;
+}
+
+.hamburger-item span,
+.hamburger-items span {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	display: block;
+	background: transparent;
+	transition: all .3s ease-in-out;
+}
+
+.hamburger-items span:nth-child(1),
+.hamburger-items span:nth-child(2),
+.hamburger-items span:nth-child(3) {
+	position: absolute;
+	height: 3px;
+	display: block;
+	border-radius: 10px;
+	color: #ffffff;
+	background-color: #ffffff;
+}
+
+.hamburger-items span:nth-child(1) {
+	top: 0;
+	width: 100%;
+	animation: menuwidth .2s;
+}
+
+.hamburger-items span:nth-child(2) {
+	width: 100%;
+	animation: menuwidth .4s;
+}
+
+.hamburger-items span:nth-child(3) {
+	top: 16px;
+	width: 100%;
+	animation: menuwidth .6s;
+}
+
+.hamburger-item span:nth-child(1),
+.hamburger-item span:nth-child(2) {
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	display: block;
+	border-radius: 10px;
+	color: #ffffff;
+	background-color: #ffffff;
+}
+
+.hamburger-item span:nth-child(1) {
+	top: 0;
+	transform-origin: 0px;
+	transform: rotate(33deg);
+	left: 3px;
+	animation: menuwidth .6s;
+}
+
+.hamburger-item span:nth-child(2) {
+	top: 16px;
+	left: 3px;
+	transform-origin: 0px;
+	transform: rotate(-33deg);
+	animation: menuwidth .4s;
+}
+
+/* humburger animations for swapping the spans */
+
+@keyframes menuwidth {
+	100% {
+		width: 100%;
+	}
+	0% {
+		width: 0;
+	}
+}
+
+/* humburger animations for background effects */
+
+@keyframes backgroundClose {
+	0% {
+		transform: scale(5.7);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+ @keyframes backgroundClose1 {
+	0% {
+		transform: scale(11);
+	}
+	100% {
+		transform: scale(1);
+	}
+} 
+
+@keyframes backgroundExpand {
+	100% {
+		transform: scale(5.7);
+	}
+	0% {
+		transform: scale(1);
+	}
+}
+
+@keyframes backgroundExpand1 {
+	100% {
+		transform: scale(11);
+	}
+	0% {
+		transform: scale(1);
+	}
+}
+
+@media only screen and (min-device-width: 48em) and (max-device-width: 64em) {
+	.menu-background {
+		transform: scale(1);
+		animation: backgroundClose1 .3s;
+	}
+
+	.close-background {
+		transform: scale(11);
+		animation: backgroundExpand1 .3s;
+		height: 33.5px;
+	}
+}
