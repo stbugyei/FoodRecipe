@@ -36,8 +36,24 @@
 	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
 }
 
+.typetexts,
+.typetexts1 {
+	white-space: nowrap;
+	overflow: hidden;
+	animation: typing 2s linear;
+}
+
+.typetext,
+.typetext1 {
+	white-space: nowrap;
+	overflow: hidden;
+	animation: typingAnnex 2s;
+	animation-delay: 0s;
+}
+
 .blockquote:after,
 .blockquote1:after {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	position: absolute;
 	content: "”";
 	color: salmon;
@@ -53,14 +69,6 @@
 	color: #980369;
 }
 
-.typetext,
-.typetext1 {
-	display: inline-block;
-	white-space: nowrap;
-	overflow: hidden;
-	animation: typing 2s linear;
-}
-
 .blockquote h4,
 .blockquote1 h4 {
 	position: relative;
@@ -73,6 +81,15 @@
 }
 
 @keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 500px;
+	}
+}
+
+@keyframes typingAnnex {
 	from {
 		width: 0;
 	}
@@ -101,13 +118,14 @@
 }
 
 .search-input {
+	position: relative;
 	width: 100%;
 	height: 100%;
 	font-size: 1em;
 	border-radius: 25px;
 	border: 2px transparent;
-	padding: 0 45px 0 20px;
-	outline: 0;
+	padding: 0px 45px 0px 20px;
+	outline: none;
 	overflow: hidden;
 	white-space: nowrap;
 	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.09);
@@ -123,8 +141,8 @@
 .search-input::-webkit-input-placeholder {
 	color: #000;
 	position: relative;
-	font-size: .8em;
-	letter-spacing: 0.1em;
+	font-size: .9em;
+	letter-spacing: 0.01em;
 }
 
 .btn,
@@ -168,16 +186,21 @@
 		font-size: 14px;
 	}
 
-	.typetext{
-		font-size: 16px;
+	.typetext {
+		font-size: 14px;
+	}
+
+	.blockquote,
+	.blockquote1 {
+		border-top: none;
 	}
 
 	.blockquote:after,
 	.blockquote1:after {
 		color: salmon;
-		font-size: 7rem;
-		bottom: -30px;
-		right: 0px;
+		font-size: 5rem;
+		bottom: 30px;
+		right: -6px;
 	}
 
 	.blockquote1:after {
@@ -188,14 +211,12 @@
 		padding-top: 50px;
 	}
 
-
 	.blockquote h4,
 	.blockquote1 h4 {
 		padding-top: 10px;
 	}
 }
 
-/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
 @media (min-width: 481px) and (max-width: 768px) {
 	.nav-wrapper {
 		left: 2%;
@@ -205,6 +226,18 @@
 	.typetext,
 	.blockquote h2 {
 		font-size: 16px;
+	}
+
+	.blockquote:after,
+	.blockquote1:after {
+		color: salmon;
+		font-size: 7rem;
+		bottom: 30px;
+		right: -10px;
+	}
+
+	.blockquote1:after {
+		color: #980369;
 	}
 
 	.blockquote h4,
@@ -218,5 +251,12 @@
 
 	.form-wrapper__content {
 		margin: -25px auto;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 736px) {
+	.typetext,
+	.blockquote h2 {
+		font-size: 20px;
 	}
 }

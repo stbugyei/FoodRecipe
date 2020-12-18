@@ -189,7 +189,7 @@ ul.food-list__favcard {
 	text-align: center;
 }
 
-/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
+
 @media (min-width: 320px) and (max-width: 480px) {
 	.food-list__cardwrapper {
 		grid-gap: 0.8rem;
@@ -237,7 +237,7 @@ ul.food-list__favcard {
 	}
 }
 
-/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+
 @media (min-width: 481px) and (max-width: 768px) {
 	ul.food-list__card {
 		width: 29%;

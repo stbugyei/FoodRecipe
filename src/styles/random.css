@@ -114,7 +114,7 @@ ul.random-list__card {
 	border-color: #61045f;
 }
 
-/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
+
 @media (min-width: 320px) and (max-width: 480px) {
 	.random-list__poster {
 		width: 35%;
@@ -178,9 +178,14 @@ ul.random-list__card {
 	}
 }
 
-/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+
 @media (min-width: 481px) and (max-width: 768px) {
-	.btn-random__pick,
+	.btn-random__pick {
+		width: 90%;
+		left: 68%;
+		top: -4.5%;
+	}
+
 	.btn-random__pick1 {
 		left: 81%;
 		top: -4.5%;
@@ -188,5 +193,6 @@ ul.random-list__card {
 
 	.category {
 		top: -4%;
+		left: -50px;
 	}
 }

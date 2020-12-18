@@ -9,7 +9,8 @@ const Form = ({ query }) => {
 
         <>
             <span className="blockquote">
-              <h2>One cannot think well, love well, sleep well, if <span className="typetext">one has not dined well.</span></h2>
+              <h2 className="typetexts">One cannot think well, love well, sleep well, if </h2>
+              <h2 className="typetext">one has not dined well.</h2>
                 <h4>&mdash;Virginia Wolf</h4>
             </span>
             <div className="form-wrapper__content">

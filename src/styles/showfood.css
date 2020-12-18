@@ -140,7 +140,7 @@
 .food-header__details {
 	position: absolute;
 	max-width: 100%;
-	top: 50px;
+	top: 60px;
 	left: 0px;
 	padding: 10px;
 	border-top-right-radius: 10px;
@@ -343,7 +343,6 @@
 	height: 100%;
 }
 
-/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
 @media (min-width: 320px) and (max-width: 480px) {
 	.food-wrapper,
 	.food-wrapper1 {
@@ -376,6 +375,11 @@
 		font-size: 12px;
 	}
 
+	.food-category h3,
+	.drink-category h3 {
+		color: #000000;
+	}
+
 	.food-details__ingredients::before {
 		display: none;
 	}
@@ -398,18 +402,25 @@
 		text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
 	}
 
+	.food-details__instructions1 {
+		margin-bottom: 15px;
+	}
+
 	.food-details__instructions h2,
 	.food-details__instructions1 h2 {
 		margin-bottom: 0px;
 	}
 
+	.video-wrapper {
+		padding-bottom: 73.25%;
+	}
+
 	.video-container {
-		margin-top: 20px;
+		margin: 20px 0px;
 		padding: initial;
 	}
 }
 
-/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
 @media (min-width: 481px) and (max-width: 768px) {
 	.food-wrapper,
 	.food-wrapper1 {
@@ -427,6 +438,11 @@
 
 	.food-header__content {
 		flex-direction: column;
+	}
+
+	.food-category h3,
+	.drink-category h3 {
+		color: #000000;
 	}
 
 	.food-img__container,
@@ -474,8 +490,12 @@
 		margin-bottom: 0px;
 	}
 
+	.video-wrapper {
+		padding-bottom: 48.25%;
+	}
+
 	.video-container {
-		margin-top: 20px;
+		margin: 20px 0px;
 		padding: initial;
 	}
 }

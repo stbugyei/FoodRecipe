@@ -8,10 +8,11 @@ const CocktailForm = ({ queryDrinks }) => {
     return (
         <>
             <span className="blockquote1 blockquote">
-                <h2>I don’t have a drinking problem ‘cept when I<span className="typetext1">can’t get a drink.</span></h2>
+                <h2 className="typetexts1">I don’t have a drinking problem ‘cept when </h2>
+                <h2 className="typetext1"> I can’t get a drink.</h2>
                 <h4>&mdash;Tom Waits</h4>
             </span>
-            
+
             <div className="form-wrapper__content">
                 <form className="form">
                     <input

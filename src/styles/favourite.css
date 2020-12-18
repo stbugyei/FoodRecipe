@@ -172,7 +172,7 @@
 	}
 }
 
-/* @media only screen and (min-device-width: 48em) and (max-device-width: 64em) { */
+
 @media (min-width: 481px) and (max-width: 768px) {
 	.fav-list__container {
 		padding: 0px 10px;
