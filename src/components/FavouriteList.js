@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import useLocalStorage from "../components/useLocalStorage"
 import FavouriteCard from "../cards/FavouriteCard";
-import '../styles/favourite.css'
 import FavouriteDrinkCard from "../cards/FavouriteDrinkCard";
+import '../styles/favourite.css'
 
 const FavouriteList = () => {
 
@@ -10,6 +11,22 @@ const FavouriteList = () => {
     const [favDrinkList, setFavDrinkList] = useState([]);
     const [favoriteList, setFavoriteList] = useLocalStorage("favoritList", []);
     const [favoriteDrinkList, setFavoriteDrinkList] = useLocalStorage("favoriteDrinkList", []);
+
+    const favTally = () => {
+        let myFood = [];
+        let myDrink = [];
+
+        if (favoriteList.length !== null) {
+            myFood.push(favoriteList.length)
+        }
+
+        if (favoriteDrinkList.length !== null) {
+            myDrink.push(favoriteDrinkList.length)
+        }
+
+        const tally = (((parseFloat(myDrink)) + (parseFloat(myFood))))
+        return tally
+    }
 
 
     useEffect(() => {
@@ -33,27 +50,31 @@ const FavouriteList = () => {
 
     }, [])
 
-    //====== Adding and Removing items to localStorage  ======
-    const addToStorage = (food) => {
+    //====== Create false/empty route to update localStorage on item remove  ======
+    const history = useHistory();
 
-        if (!favoriteList.some(fav => fav.idMeal === food.idMeal)) {
-            setFavoriteList([...favoriteList, food]);
-
-        } else {
-            const newList = favoriteList.filter((item) => item.idMeal !== food.idMeal)
-            setFavoriteList(newList)
-        }
+    const reload = () => {
+        let currentPath = window.location.pathname;
+        history.replace('/favouritelist');//fake path
+        setTimeout(() => {
+            history.replace(currentPath)
+        }, 0)
     }
 
-    const addDrinkToStorage = (cock) => {
+    //====== Removing items to localStorage  ======
+    const removeFromStorage = (food) => {
+        const newList = favoriteList.filter((item) => item.idMeal !== food.idMeal)
+        setFavoriteList(newList);
+        reload();
+    }
 
-        if (!favoriteDrinkList.some(fav => fav.idDrink === cock.idDrink)) {
-            setFavoriteDrinkList([...favoriteDrinkList, cock]);
 
-        } else {
-            const newList = favoriteDrinkList.filter((item) => item.idDrink !== cock.idDrink)
-            setFavoriteDrinkList(newList)
-        }
+    const removeDrinkFromStorage = (cock) => {
+        //if (window.confirm(`Do you want to Remove ${cock.strDrink}?`)) {
+        const newList = favoriteDrinkList.filter((item) => item.idDrink !== cock.idDrink)
+        setFavoriteDrinkList(newList)
+        reload();
+        //}
     }
 
 
@@ -66,7 +87,7 @@ const FavouriteList = () => {
                     favList={favList}
                     favoriteList={favoriteList}
                     meal={meal}
-                    addToStorage={addToStorage}
+                    removeFromStorage={removeFromStorage}
                 />
             </div>
         )
@@ -81,15 +102,28 @@ const FavouriteList = () => {
                     cocktail={cocktail}
                     favDrinkList={favDrinkList}
                     favoriteDrinkList={favoriteDrinkList}
-                    addDrinkToStorage={addDrinkToStorage}
+                    removeDrinkFromStorage={removeDrinkFromStorage}
                 />
             </div>
         )
     })
 
+    //====== Printing singular and Plural forms of the word(item)  ======
+    const items = () => {
+        if (favTally() === 1) {
+            return <>item</>
+        } else {
+            return <>items</>
+        }
+    }
+
     return (
         <div className="fav-list__container">
-            <h2>My Favourites</h2>
+            <ul className="fav-caption">
+                <li className="fav-caption__text"><h2>My Favourites</h2></li>
+                {favTally() === 0 ? <li><h2>You have No Favourites!</h2></li> : <li><h2>You have <button className="btn-store__fav1">{favTally()}</button> {items()} in Favourites!</h2></li>}
+            </ul>
+
             <div className="fav-list__cardwrapper">
                 {(favList) ? <>{foodCard}</> : ''}
                 {(favDrinkList) ? <>{drinkCard}</> : ''}

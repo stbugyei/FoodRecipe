@@ -1,27 +1,44 @@
-import React from 'react'
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
+import { IoIosHeart } from 'react-icons/io';
 import '../styles/favourite.css'
 
 
 const FavouriteDrinkCard = (props) => {
 
-    const { addDrinkToStorage, cocktail, favoriteDrinkList } = props
+    const { removeDrinkFromStorage, cocktail } = props
+    const [isopen, setIsopen] = useState(false)
 
-    const colorToggle = favoriteDrinkList.filter(data => data.strDrink === cocktail.strDrink);
+    const handleClick = () => {
+        setIsopen(!isopen)
+    }
+
 
     return (
 
         <>
-            { (colorToggle.length !== 0) ? (
-                <button className="btn-store__favactive" onClick={() => addDrinkToStorage(cocktail)}>
-                    <IoIosHeart style={{ color: 'red', fontSize: '20px', fontWeight:'bold', transition: 'all .4s' }} />
-                </button>
-            ) : (
-                    <button className="btn-store__favactive" onClick={() => addDrinkToStorage(cocktail)}>
-                        <IoIosHeartEmpty style={{ color: 'red', fontSize: '20px', fontWeight:'bold', transition: 'all .4s' }} />
-                    </button>
-                )}
+         <button className="btn-store__favactive" onClick={handleClick}>
+                <IoIosHeart style={{ color: 'red', fontSize: '20px', fontWeight: 'bold', transition: 'all .4s' }} />
+            </button>
+
+            <div className={isopen ? 'confirm' : 'confirm-annex'}>
+                <div class="popup">
+                    <ul className="alert-box">
+                        <li><button className="btn-info">&#33;</button></li>
+                        <li> <button className="btn-close" onClick={handleClick}>&times;</button></li>
+                    </ul>
+
+                    <ul class="popup-content">
+                        <li><p>Remove</p></li>
+                        <li>
+                            <p>{cocktail.strDrink}?</p>
+                        </li>
+                    </ul>
+
+                    <button className="btn-yes" onClick={() => removeDrinkFromStorage(cocktail)}>Yes</button>
+                </div>
+            </div>
+
 
             <div className="fav-list__poster">
                 <img src={cocktail.strDrinkThumb} alt="favList" />

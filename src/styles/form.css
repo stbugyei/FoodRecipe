@@ -159,6 +159,7 @@
 	box-shadow: 1px 7px 14px -9px rgb(254, 102, 125);
 	background: linear-gradient(90deg, rgba(254, 110, 124, 1) 0%, rgba(255, 161, 118, 1) 136%);
 	color: #fff;
+	z-index: 99999;
 }
 
 .btn1 {

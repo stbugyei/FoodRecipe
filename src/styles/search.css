@@ -202,6 +202,7 @@ ul.food-list__favcard {
 
 	.alcohol-caption {
 		padding: .75em;
+		font-size: 20px;
 	}
 
 	.alcohol-caption::before {
@@ -234,6 +235,11 @@ ul.food-list__favcard {
 	.pagination-previous {
 		padding: 0 .5em;
 		margin-left: .6em;
+	}
+
+	.pagination-ellipsis {
+		margin: 0;
+		padding: 0 .2em;
 	}
 }
 

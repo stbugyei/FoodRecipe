@@ -8,12 +8,22 @@
 	animation: fade 1s;
 }
 
+ul.fav-caption {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	transition: all .3s;
+}
+
 .fav-list__cardwrapper {
+	position: relative;
 	width: 100%;
 	margin: 70px 0px;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 2rem;
+	transition: all .3s;
 }
 
 .fav-list__container h2:before {
@@ -68,6 +78,20 @@
 	transition: all .4s;
 }
 
+.btn-store__fav1 {
+	outline: none;
+	width: 35px;
+	height: 35px;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 50%;
+	color: salmon;
+	background-color: #fff;
+	border: 1px solid transparent;
+	box-shadow: 1px 7px 14px -11px #001;
+	padding-top: 5px;
+}
+
 .btn-store__favactive:hover,
 .btn-store__fav:hover {
 	box-shadow: none;
@@ -91,6 +115,123 @@
 	position: relative;
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
+}
+
+.confirm {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	transform-origin: bottom;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .09);
+	background-color: hsla(0, 0%, 100%, .21);
+	z-index: 9999;
+	transition: all .3s;
+}
+
+.confirm-annex {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	z-index: -1;
+	transition: all .3s;
+}
+
+.popup {
+	width: 100%;
+	margin: 50px auto;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 5px;
+}
+
+ul.alert-box {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.btn-info,
+.btn-close {
+	font-family: 'Poppins', sans-serif;
+	outline: none;
+	width: 35px;
+	height: 35px;
+    font-size: 25px;
+	border-radius: 50%;
+	color: red;
+	background-color: #fff;
+	border: 1px solid transparent;
+	box-shadow: 1px 7px 14px -11px #001;
+}
+
+
+.btn-close {
+	cursor: pointer;
+}
+
+.btn-close:hover{
+	box-shadow: none;
+}
+
+ul.popup-content {
+	padding: 0px 5px;
+	border-top: 1px solid red;
+	border-bottom: 1px solid red;
+}
+
+ul.popup-content li:first-child p {
+	padding: 10px 0px 0px 0px;
+}
+
+ul.popup-content li p {
+	width: 100%;
+	font-size: 13px;
+	padding: 0px 0px 10px 0px;
+	text-transform: capitalize;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+}
+
+.btn-yes {
+	position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+	font-family: 'Poppins', sans-serif;
+	outline: none;
+	cursor: pointer;
+	width: 40px;
+    height: 40px;
+	font-size: 18px;
+	font-weight: 500;
+	border-radius: 50%;
+	color: red;
+	background-color: #fff;
+	border: 1px solid transparent;
+	box-shadow: 1px 7px 14px -11px #001;
+	border: 1px double red;
+    margin-top: 6px;
 }
 
 .fav-list__poster img {
@@ -156,6 +297,14 @@
 		margin-top: 30px;
 	}
 
+	ul.fav-caption li h2 {
+		font-size: 20px;
+	}
+
+	.fav-caption__text {
+		display: none;
+	}
+
 	.food-list__favcard {
 		width: 45%;
 		margin-left: 6px;
@@ -164,14 +313,22 @@
 	.fav-list__cardwrapper {
 		grid-gap: 1rem;
 		gap: 1rem;
-		margin: 28px 0px;
+		margin: 40px 0px;
 	}
 
 	.fav-list__container h2:before {
-		width: 30%;
+		width: 25%;
+	}
+
+	.popup {
+		margin: 45px auto;
+		padding-bottom: 0px;
+	}
+
+	.btn-yes {
+		margin-bottom: 6px;
 	}
 }
-
 
 @media (min-width: 481px) and (max-width: 768px) {
 	.fav-list__container {
