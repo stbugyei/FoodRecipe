@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { IoIosHeart } from 'react-icons/io';
+import { IoTrashOutline } from 'react-icons/io5';
 import '../styles/favourite.css'
 
 
@@ -17,18 +17,17 @@ const FavouriteCard = (props) => {
     return (
 
         <>
-            <button className="btn-store__favactive" onClick={handleClick}>
-                <IoIosHeart style={{ color: 'red', fontSize: '20px', fontWeight: 'bold', transition: 'all .4s' }} />
+            <button className={isopen ? 'exit-favactive' : 'btn-stored__favactive'} onClick={handleClick}>
+                <IoTrashOutline style={{ color: 'salmon', fontSize: '20px', fontWeight: 'bold', transition: 'all .4s' }} />
             </button>
 
             <div className={isopen ? 'confirm' : 'confirm-annex'}>
-                <div class="popup">
+                <div className="popup">
                     <ul className="alert-box">
-                        <li><button className="btn-info">&#33;</button></li>
                         <li> <button className="btn-close" onClick={handleClick}>&times;</button></li>
                     </ul>
 
-                    <ul class="popup-content">
+                    <ul className="popup-content">
                         <li><p>Remove</p></li>
                         <li>
                             <p>{meal.strMeal}?</p>
