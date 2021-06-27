@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MetaTags from 'react-meta-tags';
 import { useHistory } from "react-router-dom";
 import useLocalStorage from "../components/useLocalStorage"
 import FavouriteCard from "../cards/FavouriteCard";
@@ -61,7 +62,7 @@ const FavouriteList = () => {
         }, 0)
     }
 
-    //====== Removing items to localStorage  ======
+    //====== Removing items from localStorage  ======
     const removeFromStorage = (food) => {
         const newList = favoriteList.filter((item) => item.idMeal !== food.idMeal)
         setFavoriteList(newList);
@@ -76,7 +77,6 @@ const FavouriteList = () => {
         reload();
         //}
     }
-
 
     const foodCard = favList.map((meal) => {
         if (!favList) { return '' }
@@ -118,15 +118,26 @@ const FavouriteList = () => {
     }
 
     return (
-        <div className="fav-list__container">
-            <ul className="fav-caption">
-                <li className="fav-caption__text"><h2>My Favourites</h2></li>
-                {favTally() === 0 ? <li><h2>You have No Favourites!</h2></li> : <li><h2>You have <button className="btn-store__fav1">{favTally()}</button> {items()} in Favourites!</h2></li>}
-            </ul>
 
-            <div className="fav-list__cardwrapper">
-                {(favList) ? <>{foodCard}</> : ''}
-                {(favDrinkList) ? <>{drinkCard}</> : ''}
+        <div className="header">
+            <div className="container">
+                <div className="fav-list__container">
+
+                    <MetaTags>
+                        <title>Priscy | Favourites</title>
+                        <meta name="description" content="My favorite meals and cocktails." />
+                    </MetaTags>
+
+                    <ul className="fav-caption">
+                        <li className="fav-caption__text"><h2>My Favourites</h2></li>
+                        {favTally() === 0 ? <li><h2>You have No Favourites!</h2></li> : <li><h2>You have <button className="btn-store__fav1">{favTally()}</button> {items()} in Favourites!</h2></li>}
+                    </ul>
+
+                    <div className="fav-list__cardwrapper">
+                        {(favList) ? <>{foodCard}</> : ''}
+                        {(favDrinkList) ? <>{drinkCard}</> : ''}
+                    </div>
+                </div>
             </div>
         </div>
     )

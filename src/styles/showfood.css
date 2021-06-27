@@ -211,6 +211,39 @@
 	list-style: square;
 }
 
+figure {
+	text-align: center;
+	animation: 1s btnzoom;
+	transition: all.3s;
+}
+
+figure:hover img {
+	transition: all.3s;
+	transform: scale(1.1);
+}
+
+.thumbnailTitleCard-wrapper {
+	width: 100%;
+	color: #61045f;
+	padding: 10px;
+	margin: 25px 0px;
+	border-radius: 10px;
+	text-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
+	transition: all .3s;
+}
+
+.thumbnailTitle-content {
+	width: 100%;
+	gap: 1rem;
+	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	background-color: transparent;
+	transition: all .3s;
+}
+
+
 .food-details__ingredients::before {
 	position: absolute;
 	content: "";
@@ -248,7 +281,6 @@
 	height: 90%;
 	bottom: 0;
 	right: 0;
-	/* clip-path: polygon(33% 100%, 100% 100%, 100% 26%); */
 	background-image: url(../image/drinkcock.jpg);
 	background-repeat: no-repeat;
 	background-position: top;
@@ -343,159 +375,189 @@
 	height: 100%;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-	.food-wrapper,
-	.food-wrapper1 {
-		padding: 0 15px;
-		margin-top: 0px;
-	}
-
-	.btn-navigate__back,
-	.btn-navigate__back1 {
-		right: 6%;
-		top: 20px;
-		color: #ffffff;
-		border-color: #fff;
-		box-shadow: 0px 0px 5px #fff;
-	}
-
-	.food-header__content {
-		flex-direction: column;
-	}
-
-	.food-img__container,
-	.drink-img__container {
-		position: relative;
-		width: 100%;
-		padding-bottom: 100%;
-		border-radius: 10px;
-	}
-
-	.food-header__title {
-		font-size: 12px;
-	}
-
-	.food-category h3,
-	.drink-category h3 {
-		color: #000000;
-	}
-
-	.food-details__ingredients::before {
-		display: none;
-	}
-
-	.food-details__ingredients,
-	.drink-details__ingredients {
-		position: relative;
-		width: 100%;
-		border-radius: 10px;
-	}
-
-	.food-details__instructions,
-	.food-details__instructions1 {
-		line-height: 1.8;
-		padding: 10px;
-		margin: auto;
-		box-shadow: 0 10px 20px rgba(0, 0, 0, .09);
-		background-color: hsla(0, 0%, 100%, .61);
-		border-radius: 10px;
-		text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
-	}
-
-	.food-details__instructions1 {
-		margin-bottom: 15px;
-	}
-
-	.food-details__instructions h2,
-	.food-details__instructions1 h2 {
-		margin-bottom: 0px;
-	}
-
-	.video-wrapper {
-		padding-bottom: 73.25%;
-	}
-
-	.video-container {
-		margin: 20px 0px;
-		padding: initial;
-	}
+.ingredient-front__wrapper {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	border-radius: 10px;
+	margin: 25px 0px;
+	box-shadow: 0px 10px 20px rgb(0 0 0 / 9%);
+	background-color: #fff;
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
-	.food-wrapper,
-	.food-wrapper1 {
-		padding: 15px;
-	}
+.ingredient-front__wrapper h1 {
+	margin: 10px 0px 25px;
+}
 
-	.btn-navigate__back,
-	.btn-navigate__back1 {
-		right: 4%;
-		top: 25px;
-		color: #ffffff;
-		border-color: #fff;
-		box-shadow: 0px 0px 5px #fff;
-	}
+.ingredient-front__content {
+	width: 100%;
+	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 1.3rem;
+	transition: all .3s;
+}
 
-	.food-header__content {
-		flex-direction: column;
-	}
+.thumbnailCard {
+	width: 125px;
+	height: auto;
+	cursor: pointer;
+	transition: all .3s;
+	animation: .3s btnzoom1;
+}
 
-	.food-category h3,
-	.drink-category h3 {
-		color: #000000;
-	}
+.thumbnailCard a {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
 
-	.food-img__container,
-	.drink-img__container {
-		position: relative;
-		width: 100%;
-		padding-bottom: 56.25%;
-		height: 0;
-		overflow: hidden;
-		border-radius: 10px;
-	}
+.thumbnailCard:hover .thumbnail-plate img {
+	transform: scale(1.3);
+	transition: .3s;
+}
 
-	.food-img__container img {
-		height: 100%;
-	}
+.thumbnailCard:hover .thumbnail-plate1 img {
+	transform: scale(1.3);
+	transition: .3s;
+}
 
-	.food-header__title {
-		font-size: 12px;
-	}
+.thumbnail-plate,
+.thumbnail-plate1,
+.thumbnail-plate2 {
+	position: relative;
+	width: 100%;
+	height: 125px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	border-radius: 50%;
+	justify-content: center;
+	background-color: transparent;
+	background-image: url(/src/image/plate2.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: auto;
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
+	transition: all .3s;
+}
 
-	.food-details__ingredients::before {
-		display: none;
-	}
 
-	.food-details__ingredients,
-	.drink-details__ingredients {
-		position: relative;
-		width: 100%;
-		border-radius: 10px;
-	}
+.thumbnail-plate {
+	background-image: none;
+	box-shadow: none;
+}
 
-	.food-details__instructions,
-	.food-details__instructions1 {
-		line-height: 1.8;
-		padding: 10px;
-		margin: auto;
-		box-shadow: 0 10px 20px rgba(0, 0, 0, .09);
-		background-color: hsla(0, 0%, 100%, .61);
-		border-radius: 10px;
-		text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
-	}
+.thumbnail-plate1 {
+	background-image: url(/src/image/plate.png);
+}
 
-	.food-details__instructions h2,
-	.food-details__instructions1 h2 {
-		margin-bottom: 0px;
-	}
+.thumbnail-plate2 {
+	width: 100px;
+	border-radius: 4px;
+	background-image: none;
+	border: 1px solid #9fa8da;
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
+}
 
-	.video-wrapper {
-		padding-bottom: 48.25%;
-	}
 
-	.video-container {
-		margin: 20px 0px;
-		padding: initial;
-	}
+.load-ingredient,
+.load-ingredient1 {
+	width: 300px;
+	padding: 4px;
+	text-align: center;
+	border: 2px solid #ff5550;
+	color: #ff5550;
+	border-radius: 5px;
+	box-shadow: 0px 10px 14px -14px rgb(254 102 67);
+	text-shadow: 0 3px 50px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
+	background-color: transparent;
+	transition: all .2s;
+	margin: 30px 0px 15px auto;
+	text-shadow: 0px 0px 0px #ff5550;
+	cursor: pointer;
+	transition: all .3s;
+}
+
+.load-ingredient1 {
+	color: #c29;
+	border-color: #c29;
+	box-shadow: 0px 10px 14px -10px#980369;
+}
+
+.load-ingredient:hover,
+.load-ingredient1:hover {
+	color: initial;
+	border-color: initial;
+	box-shadow: none;
+}
+
+.food-wrapper1 {
+	width: 100%;
+	padding: initial;
+}
+
+.food-header__content1 {
+	width: 100%;
+}
+
+.single-detail__wrapper img {
+	float: left;
+	width: 30%;
+	z-index: 99;
+}
+
+
+.single-detail__wrapper {
+	position: relative;
+	padding: 25px;
+	line-height: 1.8rem;
+	border-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0px 10px 20px rgb(0 0 0 / 9%);
+	transition: all .3s;
+	float: none;
+	z-index: 1;
+}
+
+.single-ingredient h2 {
+	padding-bottom: 10px;
+}
+
+.hide {
+	transform: scale(0);
+	display: none;
+}
+
+.loadmore-btn {
+	width: 100%;
+	padding: 5px;
+	margin-top: 15px;
+	letter-spacing: .1em;
+	font-family: 'Montserrat', sans-serif;
+	font-size: inherit;
+	font-size: 1.2em;
+	font-weight: 500;
+	color: #551a8b;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transform-origin: bottom;
+	text-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%); 
+	background-color: #cbcbec;
+    box-shadow: 0px 10px 20px rgb(0 0 0 / 9%);
+	transition: all .6s;
+}
+
+.loadmore-btn:hover {
+	color: #fff;
+	transition: .6s;
+	letter-spacing: .3em;
+	background-color: #fe8679;
 }

@@ -1,23 +1,32 @@
-import React from 'react'
+import React from "react";
 import { withRouter } from 'react-router-dom'
+import MetaTags from 'react-meta-tags';
 import '../styles/main.css'
 import Form from './form'
 import Random from './Random'
-import SearchResults from './SearchResults'
+import FrontPageIngredients from "./FrontPageIngredients"
+import FrontPageCategories from "./FrontPageCategories"
+import RandomGenerator from "./RandomGenerator"
+
 
 const Main = (props) => {
 
-    const { query, onSubmit, onChange, randomRecipe, recipe, error, randError } = props
+    const { onSubmit, onChange, randomRecipe, randomRecipeGenerator, errorRecipeGenerator, randError, mealCatDiv } = props
 
     return (
 
         <div className="main-wrapper">
             <div className="header">
                 <div className="container">
+                    <MetaTags>
+                        <title>Priscy | Meals </title>
+                        <meta name="description" content="Ingredients such as chicken, salmon, beef and avocado. Also available are meals category like: vegan, vegetarian, breakfast seafood and the likes." />
+                    </MetaTags>
+
                     <ul className="outer-main__section">
                         <li className="inner-main__section1">
                             <div className="form-wrapper" onSubmit={onSubmit} onChange={onChange}>
-                                <Form query={query} />
+                                <Form />
                             </div>
 
                             <div className="random-wrapper">
@@ -26,7 +35,9 @@ const Main = (props) => {
                         </li>
 
                         <li className="search-wrapper">
-                            <SearchResults recipe={recipe} error={error} />
+                            <FrontPageIngredients />
+                            <FrontPageCategories mealCatDiv={mealCatDiv} />
+                            <RandomGenerator randomRecipeGenerator={randomRecipeGenerator} errorRecipeGenerator={errorRecipeGenerator} />
                         </li>
                     </ul>
                 </div>
@@ -36,4 +47,3 @@ const Main = (props) => {
 }
 
 export default withRouter(Main)
-

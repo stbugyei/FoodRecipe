@@ -1,72 +1,89 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from "react-router-dom";
+import MetaTags from 'react-meta-tags';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import '../styles/search.css'
 import Loader from '../components/Loader';
-import Pagination from './Pagination'
+import videoURL from '../video/alchohol.mp4'
+import poster from '../image/drinkcock.jpg'
 
 
-const Alcohol = ({ itemsPerPage, alcohol }) => {
+const Alcohol = (props) => {
 
-    const { currentPage, slicedAlcohol, pagination, prevPage, nextPage, changePage } = Pagination({ itemsPerPage, alcohol });
+    const { alcohol } = props
+    const [paginate, setPaginate] = useState(24);
+
+    useEffect(() => {
+
+        //====== function to load more ingredients =======//
+        const displaxNextList = () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                setPaginate((prevValue) => prevValue + 24)
+            }
+        }
+
+        window.addEventListener('scroll', displaxNextList);
+        return () => window.removeEventListener('scroll', displaxNextList);
+
+    }, [])
 
 
     if (!(alcohol && Object.keys(alcohol).length)) {
         return <><Loader /></>
     }
 
-    const alcoholCard = slicedAlcohol.map((drink, index) => {
-        return (
-            <ul className="food-list__card" key={slicedAlcohol[index].idDrink}>
 
-                <li className="food-list__poster">
-                    <img src={drink.strDrinkThumb} alt="cocktail" />
-                </li>
+    const alcoholCard = alcohol.slice(0, paginate).map((drink, index) => {
+        return (
+            <div className="food-list__card" key={alcohol[index].idDrink}>
+
+                <div className="food-list__poster">
+                    <LazyLoadImage
+                        alt={drink.strDrink}
+                        effect="blur"
+                        src={drink.strDrinkThumb}
+                        style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
+                        className="lazyimg"
+                    />
+                </div>
 
                 <div className="title-discover">
-                    <li>
+                    <div>
                         <p className='title'> {drink.strDrink} </p>
-                    </li>
+                    </div>
 
                     <Link to={{
-                        pathname: `/drinks/${slicedAlcohol[index].idDrink}`
+                        pathname: `/drinks/${alcohol[index].idDrink}/${drink.strDrink}`
                     }}>
                         <button className="btn-discover1"> Discover </button>
                     </Link>
                 </div>
-            </ul>
+            </div>
         )
     })
 
     return (
         <div className="header">
             <div className="container">
-                <h2 className="alcohol-caption">Best of Alcoholic Beverages</h2>
-                <div className="food-list__cardwrapper">
-                    {alcoholCard}
-                    <nav className="pagination">
-                        <ul className="pagination-list">
-                            {pagination.map((page) => {
-                                if (!page.ellipsis) {
-                                    return <li key={page.id}>
-                                        <a
-                                            href="/#"
-                                            className={page.current ? 'pagination-link__active' : 'pagination-link'}
-                                            onClick={(e) => changePage(page.id, e)}>
-                                            {page.id}
-                                        </a>
-                                    </li>;
-                                } else {
-                                    return <li key={page.id}><span className="pagination-ellipsis">&hellip;</span></li>
-                                }
-                            }
-                            )}
-                        </ul>
 
-                        <div className="nextprev">
-                            {currentPage > 1 ? <a href="/#" className="pagination-previous" onClick={prevPage}>Prev</a> : ''}
-                            {currentPage > 1 ? <a href="/#" className="pagination-next" onClick={nextPage}>Next</a> : ''}
-                        </div>
-                    </nav>
+                <MetaTags>
+                    <title>Priscy | Alcohol</title>
+                    <meta name="description" content="Best of all alcoholic Beverages with ingredients such as champagne, gin, rum, Vodka, brandy, Strawberries, banana, triple Sec and many more." />
+                </MetaTags>
+
+                <div className="background-video__wrapper">
+                    <div className="background-video__overley"></div>
+                    <h1 className="background-video__text">Best of Alcoholic Beverages</h1>
+                    <h1 className="background-video__text1"><i className="fas fa-arrow-circle-down"></i></h1>
+                    <div className="background-video__content">
+                        <video className="background-video" autoPlay loop muted poster={poster}>
+                            <source src={videoURL} type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+                <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
+                    {alcoholCard}
                 </div>
             </div>
         </div>
@@ -74,4 +91,3 @@ const Alcohol = ({ itemsPerPage, alcohol }) => {
 }
 
 export default withRouter(Alcohol)
-

@@ -168,7 +168,6 @@ ul.fav-caption {
 .popup {
 	width: 100%;
 	height: 60%;
-	/* margin-top: 127px; */
 	margin-top: 57%;
 	background: lavender;
 	display: flex;
@@ -296,7 +295,6 @@ ul.popup-content li p {
 	border-color: #61045f;
 }
 
-/* @media only screen and (min-device-width: 20em) and (max-device-width: 30em) { */
 @media (min-width: 320px) and (max-width: 480px) {
 	.fav-list__container {
 		padding: 0px 10px;

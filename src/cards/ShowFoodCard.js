@@ -1,6 +1,8 @@
 import React from 'react'
 import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
 import '../styles/showfood.css'
+import '../styles/showfood1.css'
+import '../styles/showfoodqueries.css'
 import Option from '../image/option.svg'
 
 const ShowFoodCard = (props) => {
@@ -11,6 +13,12 @@ const ShowFoodCard = (props) => {
         return <li key={index}>{ing}</li>
     })
 
+    const createParagraphs = (text) => {
+        let mytext = text.split('.').slice(0, -1);
+        let textWithFullStop = mytext.map((item, i) => <li key={i} style={{ listStyle: 'square' }}>{item}.</li>);
+        let textwithoutFullStop = text.split("\n").map((item, i) => <li key={i} style={{ listStyle: 'square' }}>{item}.</li>);
+        if (mytext.length !== 0) { return textWithFullStop } else { return textwithoutFullStop }
+    }
 
     // function allStorage() {
 
@@ -54,9 +62,9 @@ const ShowFoodCard = (props) => {
                                         <IoIosHeart style={{ color: 'red', fontSize: '20px', transition: 'all .4s' }} />
                                     </button>
                                 ) : (
-                                        <button className="btn-store" onClick={() => addToStorage(meal)}>
-                                            <IoIosHeartEmpty style={{ color: 'white', fontSize: '20px', transition: 'all .4s' }} />
-                                        </button>)
+                                    <button className="btn-store" onClick={() => addToStorage(meal)}>
+                                        <IoIosHeartEmpty style={{ color: 'white', fontSize: '20px', transition: 'all .4s' }} />
+                                    </button>)
                                 }
                             </div>
                         </div>
@@ -75,7 +83,7 @@ const ShowFoodCard = (props) => {
 
             {meal ? <div className="food-details__instructions">
                 <h2>Instructions</h2>
-                <>{meal.strInstructions}</>
+                {createParagraphs(meal.strInstructions)}
             </div> : ''}
 
 

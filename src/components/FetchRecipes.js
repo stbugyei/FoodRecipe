@@ -1,61 +1,76 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
-import { Route, Switch, withRouter, useLocation } from "react-router-dom";
-import Alcohol from "../componentsCocktail/Alcohol";
-import CocktailMain from "../componentsCocktail/CocktailMain";
-import NonAlcohol from "../componentsCocktail/NonAlcohol";
-import ShowCocktail from "../componentsCocktail/ShowCocktail";
-import FavouriteList from "./FavouriteList";
-import Main from "./Main";
+
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { Route, Switch, withRouter, useHistory, useLocation } from "react-router-dom";
 import Nav from "./Nav";
-import ShowFood from "./ShowFood";
+import Main from "./Main"
+import Loader from './Loader';
 import Spinner from "./Spinner";
 import Welcome from "./Welcome";
+import ShowFood from "./ShowFood";
+import FavouriteList from "./FavouriteList";
+import SearchResults from "./SearchResults";
+import MealsByCountry from "./MealsByCountry";
+import CategoryMainPage from "./CategoryMainPage";
+import SingleCountryPage from "./SingleCountryPage";
+import Alcohol from "../componentsCocktail/Alcohol"
+import IngredientMianPage from "./IngredientMianPage";
+import NonAlcohol from "../componentsCocktail/NonAlcohol";
+import SingleIngredientPage from "./SingleIngredientPage";
+import useLocalStorage from "../components/useLocalStorage";
+import ShowCocktail from "../componentsCocktail/ShowCocktail";
+import CocktailMain from "../componentsCocktail/CocktailMain";
+import CocktailResults from '../componentsCocktail/CocktailResults';
+import IngredientCockMainPage from "../componentsCocktail/IngredientCockMainPage";
+import SingleCocktailCategory from "../componentsCocktail/SingleCocktailCategory";
+import SingleCockIngredientPage from "../componentsCocktail/SingleCockIngredientPage";
+const Footer = lazy(() => import("./Footer"));
 
-const url = "https://www.themealdb.com/api/json/v1/1/search.php?"
-const drinksUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?"
-const AlcoholUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
-const nonAlcoholUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
+const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
+    url = `https://www.themealdb.com/api/json/v2/`,
+    cocktailUrl = `https://www.thecocktaildb.com/api/json/v2/`;
 
 
 const FetchRecipes = () => {
 
+    const history = useHistory();
     const location = useLocation();
-
-    //======== Making a random selection of  meals and drinks =========
-    let meals = ["cheese", "butter", "meat"];
-    let cocks = ["margarita", "smoothie", "chocolate"];
-    let defaultRecipes = meals.sort(() => Math.random() - 0.5)[0];
-    let defaultCocktail = cocks.sort(() => Math.random() - 0.5)[0];
-
+    const mealCatDiv = useRef(null);
 
     const [recipe, setRecipe] = useState([]);
     const [alcohol, setAlcohol] = useState([]);
     const [nonAlcohol, setNonAlcohol] = useState([]);
     const [cocktail, setCocktail] = useState([]);
-    const [randomRecipe, setRandomRecipe] = useState('');
-    const [query, setQuery] = useState(defaultRecipes);
-    const [queryDrinks, setQueryDrinks] = useState(defaultCocktail);
+    const [randomRecipe, setRandomRecipe] = useState("");
+    const [randomCocktail, setRandomCocktail] = useState("");
+    const [randomRecipeGenerator, setRandomRecipeGenerator] = useState([]);
+    const [randomCocktailGenerator, setRandomCocktailGenerator] = useState([]);
+    const [query, setQuery] = useState("");
+    const [queryDrinks, setQueryDrinks] = useState("");
+    const [foodQuery, setfoodQuery] = useLocalStorage("foodQuery", "");
+    const [cockQuery, setCookQuery] = useLocalStorage("cockQuery", "");
     const [error, setError] = useState(false);
+    const [errorDrinks, setErrorDrinks] = useState(false);
+    const [errorRecipeGenerator, setErrorRecipeGenerator] = useState(false);
+    const [errorCocktailGenerator, setErrorCocktailGenerator] = useState(false);
     const [randError, setRandError] = useState(false);
-    const [randomCocktail, setRandomCocktail] = useState('');
 
 
-    //======================= Search function for Meals======================
+    //======================= Search function for Meals=====================
     const searchRecipe = async () => {
 
-        const recipeFeed = await fetch(`${url}s=${query}`)
+        const recipeFeed = await fetch(`${url}${API_KEY}/search.php?s=${query}`)
 
         if (query !== "") {
-
             try {
                 const searchedmeal = await recipeFeed.json();
                 setRecipe(searchedmeal.meals);
+                setfoodQuery(query);
                 setError("");
-                //setQuery("");
-
                 if (searchedmeal.meals === null) {
-                    setError(<span>Recipe <h4 style={{ color: 'red' }}>{query}</h4> is Not Available</span>);
+                    setError(<div>
+                        <Loader />
+                        <div style={errormsg}>Recipe <h4 style={{ color: 'red' }}>{query}</h4> is Not Available</div>
+                    </div>);
                 }
 
             } catch (error) {
@@ -63,24 +78,26 @@ const FetchRecipes = () => {
             }
         }
         else {
-            setError(<span> Enter search please</span>);
+            setError(returnErrorDiv());
         }
     }
 
-
     //======================= Search function Drinks ======================
     const searchCocktail = async () => {
-        const cocktailFeed = await fetch(`${drinksUrl}s=${queryDrinks}`)
+        const cocktailFeed = await fetch(`${cocktailUrl}${API_KEY}/search.php?s=${queryDrinks}`)
 
         if (queryDrinks !== "") {
-
             try {
                 const searchedcocktail = await cocktailFeed.json();
                 setCocktail(searchedcocktail.drinks);
-                setError("");
+                setCookQuery(queryDrinks)
+                setErrorDrinks("");
 
                 if (searchedcocktail.drinks === null) {
-                    setError(<span>Cocktail <h4 style={{ color: 'red' }}>{queryDrinks}</h4> is Not Available</span>);
+                    setErrorDrinks(<div>
+                        <Loader />
+                        <div style={errormsg}>Cocktail <h4 style={{ color: 'red' }}>{queryDrinks}</h4> is Not Available</div>
+                    </div>);
                 }
 
             } catch (error) {
@@ -88,63 +105,115 @@ const FetchRecipes = () => {
             }
         }
         else {
-            setError(<span> Enter search please</span>);
+            setErrorDrinks(returnErrorDiv());
         }
+    }
+
+    const returnErrorDiv = () => {
+        return (
+            <div className="error-wrapper">
+                <div> <span> No Results Found...</span>
+                    <span className="emotions">😕</span>
+                </div>
+                <div>Please try again <span className="emotions1">😊</span></div>
+            </div>
+        )
     }
 
     const onChange = e => setQuery(e.target.value);
     const handleOnChange = e => setQueryDrinks(e.target.value);
 
+    //======= Navigation functions to search page ========
+    const goToSearchPage = () => {
+        history.push("/searchrecipes");
+    }
+
+    const goToSearchedCocktailPage = () => {
+        history.push("/searchcocktailrecipes");
+    }
+
     const onSubmit = e => {
         e.preventDefault();
+        goToSearchPage();
         searchRecipe();
     };
 
     const handleOnSubmit = e => {
         e.preventDefault();
+        goToSearchedCocktailPage();
         searchCocktail();
     };
 
-    const [Randomurl] = useState("https://www.themealdb.com/api/json/v1/1/random.php");
-    const [RandomDrinkurl] = useState("https://www.thecocktaildb.com/api/json/v1/1/random.php");
 
     useEffect(() => {
 
+        const generateRandomRecipes = async () => {
+
+            const recipeRandomFeed = await fetch(`${url}${API_KEY}/randomselection.php`)
+
+            if (recipeRandomFeed) {
+                try {
+                    const randomizedMeal = await recipeRandomFeed.json();
+                    setRandomRecipeGenerator(randomizedMeal.meals)
+                    setErrorRecipeGenerator(null);
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            else {
+                setErrorRecipeGenerator(<span>Not Available</span>);
+            }
+        }
+
         const randomRecipe = async () => {
 
-            const recipeFeed = await fetch(Randomurl)
+            const recipeFeed = await fetch(`${url}${API_KEY}/random.php`)
 
             if (recipeFeed) {
-
                 try {
                     const randomMeal = await recipeFeed.json();
                     setRandomRecipe(randomMeal.meals)
                     setRandError(null);
                 } catch (error) {
                     console.log(error)
-
                 }
             }
             else {
                 setRandError(<span>Not Available</span>);
             }
-
         }
 
-        searchRecipe();
+        generateRandomRecipes();
         randomRecipe();
-    }, [Randomurl])
+    }, [mealCatDiv])
 
 
 
     useEffect(() => {
 
+        const generateRandomCocktails = async () => {
+
+            const cocktailRandomFeed = await fetch(`${cocktailUrl}${API_KEY}/randomselection.php`)
+
+            if (cocktailRandomFeed) {
+                try {
+                    const randomPickedCocktail = await cocktailRandomFeed.json();
+                    setRandomCocktailGenerator(randomPickedCocktail.drinks)
+                    setErrorCocktailGenerator(null);
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            else {
+                setErrorCocktailGenerator(<span>Not Available</span>);
+            }
+        }
+
         const randomizedCocktail = async () => {
 
-            const cocktailFeed = await fetch(RandomDrinkurl)
+            const cocktailFeed = await fetch(`${cocktailUrl}${API_KEY}/random.php`)
 
             if (cocktailFeed) {
-
                 try {
                     const randomDrink = await cocktailFeed.json();
                     setRandomCocktail(randomDrink.drinks)
@@ -159,19 +228,18 @@ const FetchRecipes = () => {
             }
         }
 
-        searchCocktail();
+        generateRandomCocktails();
         randomizedCocktail();
-    }, [RandomDrinkurl])
+    }, [])
 
 
     useEffect(() => {
 
         const alcoholicCocktail = async () => {
 
-            const alcoholFeed = await fetch(AlcoholUrl)
+            const alcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Alcoholic`);
 
             if (alcoholFeed) {
-
                 try {
                     const alcoholDrink = await alcoholFeed.json();
                     setAlcohol(alcoholDrink.drinks)
@@ -193,7 +261,7 @@ const FetchRecipes = () => {
 
         const nonAlcoholicCocktail = async () => {
 
-            const nonAlcoholFeed = await fetch(nonAlcoholUrl)
+            const nonAlcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Non_Alcoholic`);
             if (nonAlcoholFeed) {
 
                 try {
@@ -213,60 +281,107 @@ const FetchRecipes = () => {
                 setError(<span>Not Available</span>);
             }
         }
-
         alcoholicCocktail();
         nonAlcoholicCocktail();
     }, [])
 
-
     return (
 
-        <div>
-            <Nav />
-            {((randomRecipe && Object.keys(randomRecipe).length)) ?
-                <>
-                    <Switch location={location} key={location.pathname}>
+        <div className="main-wrapper">
+            <Nav mealCatDiv={mealCatDiv} />
 
-                        <Route path="/favouriteList">
-                            <FavouriteList />
-                        </Route>
+            <div className="main-content">
 
-                        <Route path="/meals/:id">
-                            <ShowFood recipe={recipe} />
-                        </Route>
+                <Switch location={location} key={location.pathname}>
+                    <Route path="/favouriteList">
+                        <FavouriteList />
+                    </Route>
 
-                        <Route path="/drinks/:id">
-                            <ShowCocktail cocktail={cocktail} />
-                        </Route>
+                    <Route path="/meals/:id/:name">
+                        <ShowFood recipe={recipe} />
+                    </Route>
 
-                        <Route path="/nonalcohol">
-                            <NonAlcohol  data={nonAlcohol} itemsPerPage={8} startFrom={1}/>
-                        </Route>
+                    <Route path="/drinks/:id/:name">
+                        <ShowCocktail cocktail={cocktail} />
+                    </Route>
 
-                        <Route path="/alcohol">
-                            <Alcohol alcohol={alcohol} itemsPerPage={8} startFrom={1} />
-                        </Route>
+                    <Route path="/nonalcohol">
+                        <NonAlcohol data={nonAlcohol} itemsPerPage={8} startFrom={1} />
+                    </Route>
 
-                        <Route exact path="/cocktail">
-                            <CocktailMain cocktail={cocktail} randomCocktail={randomCocktail} error={error} randError={randError} searchCocktail={searchCocktail} queryDrinks={queryDrinks} handleOnChange={handleOnChange} handleOnSubmit={handleOnSubmit} />
-                        </Route>
+                    <Route path="/alcohol">
+                        <Suspense fallback={<Spinner />}>
+                            <Alcohol alcohol={alcohol} />
+                        </Suspense>
+                    </Route>
 
-                        <Route exact path="/recipes">
-                            <Main recipe={recipe} randomRecipe={randomRecipe} error={error} randError={randError} searchRecipe={searchRecipe} query={query} onChange={onChange} onSubmit={onSubmit} />
-                        </Route>
+                    <Route exact path="/cocktail">
+                        <CocktailMain randomCocktailGenerator={randomCocktailGenerator} errorCocktailGenerator={errorCocktailGenerator} randomCocktail={randomCocktail} errorDrinks={errorDrinks} randError={randError} handleOnChange={handleOnChange} handleOnSubmit={handleOnSubmit} />
+                    </Route>
 
-                        <Route exact path="/">
-                            <Welcome />
-                        </Route>
+                    <Route exact path="/searchcocktailrecipes">
+                        <CocktailResults cocktail={cocktail} queryDrinks={queryDrinks} cockQuery={cockQuery} handleOnChange={handleOnChange} handleOnSubmit={handleOnSubmit} errorDrinks={errorDrinks} />
+                    </Route>
 
-                    </Switch>
-                </> : <> <Spinner /> <span style={{ display: "none" }}>{error}</span> </>}
+                    <Route exact path="/browsbycountry">
+                        <MealsByCountry />
+                    </Route>
 
+                    <Route exact path="/searchrecipes">
+                        <SearchResults recipe={recipe} query={query} foodQuery={foodQuery} onChange={onChange} onSubmit={onSubmit} error={error} />
+                    </Route>
+
+                    <Route exact path="/ingredientmainpage">
+                        <IngredientMianPage />
+                    </Route>
+
+                    <Route exact path="/singleingredientpage/:name">
+                        <SingleIngredientPage />
+                    </Route>
+
+                    <Route exact path="/singlecocktail">
+                        <SingleCocktailCategory />
+                    </Route>
+
+                    <Route exact path="/singlecocktailingredientpage/:name">
+                        <SingleCockIngredientPage />
+                    </Route>
+
+                    <Route exact path="/singlecountrypage/:name">
+                        <SingleCountryPage />
+                    </Route>
+
+                    <Route exact path="/cocktailingredientmainpage">
+                        <IngredientCockMainPage />
+                    </Route>
+
+                    <Route exact path="/categoryitempage/:name">
+                        <CategoryMainPage />
+                    </Route>
+
+                    <Route exact path="/recipes">
+                        <Main
+                            randomRecipeGenerator={randomRecipeGenerator} randomRecipe={randomRecipe}
+                            randError={randError} errorRecipeGenerator={errorRecipeGenerator}
+                            searchRecipe={searchRecipe} onChange={onChange} onSubmit={onSubmit} mealCatDiv={mealCatDiv} />
+                    </Route>
+
+                    <Route exact path="/">
+                        <Welcome />
+                    </Route>
+                </Switch>
+            </div>
+            <Suspense fallback={<Spinner />}>
+                <Footer />
+            </Suspense>
         </div>
     )
 }
 
 export default withRouter(FetchRecipes)
 
-
-
+const errormsg = {
+    fontSize: '20px',
+    margin: '30px',
+    textAlign: 'center',
+};

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import Wel from './../image/wel.jpg'
 import '../styles/welcome.css'
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Welcome = () => {
 
@@ -16,22 +16,19 @@ const Welcome = () => {
         <div className="header">
             <div className="container">
                 <div className="welcome-wrapper">
-                    <div className="welcome-content">
-                        <div className="welcome-text">
-                            <ul className="welcome-text__content">
-                                <li><h1>Welcome</h1></li>
-                                <li><h1>Home To</h1></li>
-                                <li> <h1>Abena Bugyei's</h1></li>
-                                <li><h1>Smart Recipes & </h1></li>
-                                <li><h1>Cocktails</h1></li>
-                                <button className="btn-welcome" onClick={
-                                    handleClickHome
-                                }>Find Out What's Cooking</button>
-                            </ul>
-                        </div>
-                        <div className="welcome-image">
-                            <img src={Wel} alt="" />
-                        </div>
+                    <div className="welcome-text">
+                        <span className="overley"></span>
+                        <h1>Welcome</h1>
+                        <h1>Home To</h1>
+                        <h1>Priscy Recipes </h1>
+                        <h1> & </h1>
+                        <h1>Cocktails</h1>
+                        <button className="btn-welcome" onClick={
+                            handleClickHome
+                        }>Find Out What's Cooking</button>
+
+                    </div>
+                    <div className="welcome-image">
                     </div>
                 </div>
             </div>
@@ -40,4 +37,3 @@ const Welcome = () => {
 }
 
 export default Welcome
-

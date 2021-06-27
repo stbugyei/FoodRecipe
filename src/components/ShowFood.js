@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, useParams, useHistory } from "react-router-dom";
+import MetaTags from 'react-meta-tags';
 import useLocalStorage from "../components/useLocalStorage"
 import ShowFoodCard from '../cards/ShowFoodCard';
 import '../styles/showfood.css'
+import '../styles/showfood1.css'
+import '../styles/showfoodqueries.css'
 import Spinner from "./Spinner";
 
-const url = "https://www.themealdb.com/api/json/v1/1/lookup.php?"
+const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
+    url = `https://www.themealdb.com/api/json/v2/`
 
-const ShowFood = (props) => {
+const ShowFood = () => {
 
     const { id } = useParams();
 
@@ -20,16 +24,14 @@ const ShowFood = (props) => {
     const handleClick = () => {
         history.goBack();
     }
-    const [baseUrl] = useState(`${url}i=${id}`);
 
     useEffect(() => {
 
         const getMealDetails = async () => {
 
-            const details = await fetch(baseUrl);
+            const details = await fetch(`${url}${API_KEY}/lookup.php?i=${id}`);
 
             if (details) {
-
                 try {
                     const selectedMeal = await details.json();
                     setMeal(selectedMeal.meals[0])
@@ -37,23 +39,23 @@ const ShowFood = (props) => {
                 } catch (error) {
                     console.log(error)
                 }
-
             } else {
                 setMeal([])
             }
-
         };
-
         getMealDetails();
 
-    }, [baseUrl]);
+    }, [id]);
+
 
     if (!(meal && Object.keys(meal).length)) {
-        return <Spinner/>
+        return <Spinner />
     }
+
 
     //====== Cleaning the youtube url function =======
     const youtubeVideo = meal.strYoutube.replace("watch?v=", "embed/")
+
 
     //====== Adding ingredients to the measures  ======
     let ingredients = [];
@@ -61,14 +63,12 @@ const ShowFood = (props) => {
     for (let i = 1; i <= 20; i++) {
         if (meal["strIngredient" + i]) {
             ingredients.push(
-                `${meal["strIngredient" + i]} - ${meal["strMeasure" + i]
-                }`
+                `${meal["strIngredient" + i]} - ${meal["strMeasure" + i]}`
             );
         } else {
             break;
         }
     }
-
 
 
     //====== Adding items to localStorage  ====== 
@@ -82,12 +82,24 @@ const ShowFood = (props) => {
         }
     }
 
-
+    //====== Function to display title  ====== 
+    const title = () => {
+        if (meal) {
+            return `How to prepare ${meal.strMeal}`
+        } else {
+            return `Priscy | Meal preparation`
+        }
+    }
 
     return (
 
         <div className="header">
             <div className="container">
+
+                <MetaTags>
+                    <title> {title()} </title>
+                </MetaTags>
+
                 <ShowFoodCard meal={meal} youtubeVideo={youtubeVideo} ingredients={ingredients} addToStorage={addToStorage} favoriteList={favoriteList} handleClick={handleClick} />
             </div>
         </div>
