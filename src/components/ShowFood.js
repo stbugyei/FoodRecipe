@@ -84,10 +84,10 @@ const ShowFood = () => {
 
     //====== Function to display title  ====== 
     const title = () => {
-        if (meal) {
-            return `How to prepare ${meal.strMeal}`
-        } else {
+        if (!meal) {
             return `Priscy | Meal preparation`
+        } else {
+            return `How to prepare ${meal.strMeal}`
         }
     }
 

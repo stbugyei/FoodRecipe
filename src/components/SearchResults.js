@@ -11,9 +11,7 @@ const SearchResults = (props) => {
 
     const { onSubmit, onChange, recipe, error } = props
     const storedQuery = localStorage.getItem("foodQuery");
-    const { useMediaQuery, btnSearch1, backgroundArr, queryStyle, input1Style, formStyle } = dataSource();
-    const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
-
+    const {  backgroundArr } = dataSource();
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
 
@@ -27,16 +25,15 @@ const SearchResults = (props) => {
                     </MetaTags>
 
                     <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
-                        <div className="query" style={queryStyle.responsive(targetWidth)}><h1>What Interest You?</h1> </div>
-                        <form className="form1" style={formStyle.responsive(targetWidth)} onSubmit={onSubmit} onChange={onChange}>
+                        <div className="query"><h1>What Interest You?</h1> </div>
+                        <form className="form1" onSubmit={onSubmit} onChange={onChange}>
                             <input
-                                style={input1Style.responsive(targetWidth)}
                                 className='search-input1'
                                 type='search'
                                 placeholder='Search for your favourite cuisine ...'
                                 autoComplete='off'
                             />
-                            <button style={btnSearch1.responsive(targetWidth)} className='btn-search' aria-label="Center Align">
+                            <button className='btn-search' aria-label="Center Align">
                                 <span aria-hidden="true"><i className="fas fa-search"></i></span>
                             </button>
                         </form>

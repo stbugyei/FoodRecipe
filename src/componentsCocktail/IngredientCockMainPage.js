@@ -13,14 +13,13 @@ const IngredientCockMainPage = () => {
     const { ingredientCockList } = dataSource();
     const [display, setDisplay] = useState(false);
     const [paginate, setPaginate] = useState(24);
-    const { useMediaQuery, backgroundArr, queryStyle } = dataSource1();
-    const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
-
+    const [description, setDescription] = useState(`Meal ingredients`);
+    const { backgroundArr } = dataSource1();
+   
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
     useEffect(() => {
         //====== function for scroll event to check is page is scrolled to the bottom =======//
-
         const scrolltoBottom = () => {
             (window.innerHeight + window.scrollY) >= document.body.offsetHeight ? setDisplay(true) : setDisplay(false);
         }
@@ -29,6 +28,21 @@ const IngredientCockMainPage = () => {
         return () => window.removeEventListener('scroll', scrolltoBottom);
 
     }, [])
+
+
+    useEffect(() => {
+        //====== Function to display description  ====== 
+        const description = () => {
+            const ingName = (!(ingredientCockList && Object.keys(ingredientCockList).length)) ? "" : ingredientCockList.map((name) => name.strIngredient1)
+            if (!ingName) {
+                setDescription(`Meal ingredients`)
+            } else {
+                setDescription(`${ingName}`)
+            }
+        }
+        description();
+
+    }, [ingredientCockList])
 
 
     //====== function to load more ingredients =======//
@@ -66,17 +80,6 @@ const IngredientCockMainPage = () => {
         )
     })
 
-    //====== Function to display description  ====== 
-
-    const description = () => {
-        const ingName = (!(ingredientCockList && Object.keys(ingredientCockList).length)) ? "" : ingredientCockList.map((name) => name.strIngredient1)
-        if (ingName) {
-            return `${ingName.slice(0, 30)}`
-        } else {
-            return `Meal ingredients`
-        }
-    }
-
 
     return (
 
@@ -85,11 +88,11 @@ const IngredientCockMainPage = () => {
 
                 <MetaTags>
                     <title> Priscy | Cocktail Recipes </title>
-                    <meta name="description" content={description()} />
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
-                    <div className="query" style={queryStyle.responsive(targetWidth)}><h1>Browse from Recipes Collection </h1></div>
+                    <div className="query"><h1>Browse from Recipes Collection </h1></div>
                 </div>
                 {(!(ingredientCockList && Object.keys(ingredientCockList).length)) ? <Spinner /> :
                     <div className="ingredient-front__wrapper">

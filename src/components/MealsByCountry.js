@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from 'react'
 import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -11,6 +11,7 @@ import option from '../image/option.svg'
 
 const MealsByCountry = () => {
 
+    const [description, setDescription] = useState('');
     const { mealCountryInfo, countryInfo } = dataSource();
     const { countryList } = countryData();
     const { useMediaQuery, backgroundArr, queryStyle } = dataSource1();
@@ -32,16 +33,22 @@ const MealsByCountry = () => {
         if (getFlag) { return getFlag.map((flagImg) => flagImg.flag) }
     }
 
-    //====== Function to display description  ====== 
-    const description = () => {
-        const ingTitle = (!(mealCountryInfo && Object.keys(mealCountryInfo).length)) ? ""
-            : mealCountryInfo.map((details) => details.strArea)
-        if (ingTitle) {
-            return `${ingTitle}`
-        } else {
-            return `world countries`
+
+
+    useEffect(() => {
+        //====== Function to display description  ====== 
+        const description = () => {
+            const ingTitle = (!(mealCountryInfo && Object.keys(mealCountryInfo).length)) ? ""
+                : mealCountryInfo.map((details) => details.strArea)
+            if (!ingTitle) {
+                setDescription(`world countries`)
+            } else {
+                setDescription(`${ingTitle}`)
+            }
         }
-    }
+        description()
+
+    }, [mealCountryInfo])
 
 
     const countryListCard = (!(mealCountryInfo && Object.keys(mealCountryInfo).length)) ? ""
@@ -74,7 +81,7 @@ const MealsByCountry = () => {
 
                 <MetaTags>
                     <title>Priscy | Meals by Countries</title>
-                    <meta name="description" content={description()} />
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>

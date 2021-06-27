@@ -18,6 +18,7 @@ const SingleCountryPage = (props) => {
     const { mealCountryInfo, countryInfo } = dataSource();
     const { countryList } = countryData();
     const [countryMain, setCountryMain] = useState("");
+    const [description, setDescription] = useState('');
     let query = props.location.state
 
     useEffect(() => {
@@ -44,6 +45,21 @@ const SingleCountryPage = (props) => {
     }, [query])
 
 
+    useEffect(() => {
+        //====== Function to display description  ====== 
+        const description = () => {
+            const ingTitle = (!(mealCountryInfo && Object.keys(mealCountryInfo).length)) ? "" : mealCountryInfo.map((details) => details.strArea)
+            if (!ingTitle) {
+                setDescription(`world countries`)
+            } else {
+                setDescription(`${ingTitle}`)
+            }
+        }
+        description();
+
+    }, [mealCountryInfo])
+
+
     if (!(mealCountryInfo && Object.keys(mealCountryInfo).length)) {
         return <Spinner />
     }
@@ -64,16 +80,6 @@ const SingleCountryPage = (props) => {
         let getFlag = (!(countryInfo && Object.keys(countryInfo).length))
             ? "" : countryInfo.filter(name => name.alpha2Code === countryFlag(query)[0]);
         if (getFlag) { return getFlag.map((flagImg) => flagImg.flag) }
-    }
-
-
-    const description = () => {
-        const ingTitle = mealCountryInfo.map((details) => details.strArea)
-        if (ingTitle) {
-            return `${ingTitle}`
-        } else {
-            return `world countries`
-        }
     }
 
 
@@ -114,7 +120,7 @@ const SingleCountryPage = (props) => {
 
                 <MetaTags>
                     <title> Priscy | {query} </title>
-                    <meta name="description" content={description()} />
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="food-wrapper1">

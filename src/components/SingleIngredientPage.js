@@ -16,24 +16,25 @@ const SingleIngredientPage = (props) => {
 
     const { ingredientList } = dataSource();
     const [ingredientMain, setIngredientMain] = useState("");
+    const [description, setDescription] = useState('single Ingredient data');
     let query = props.location.state
+
 
     useEffect(() => {
 
         const filterMainIngredient = async () => {
-            if (query) {
-                const ingredientMianFeed = await fetch(`${urlIngredientMain}${API_KEY}/filter.php?i=${query}`)
-                if (ingredientMianFeed.status === 200) {
-                    try {
-                        const ingredientDta = await ingredientMianFeed.json();
-                        setIngredientMain(ingredientDta.meals)
-                    } catch (error) {
-                        console.log(error)
-                    }
+
+            const ingredientMianFeed = await fetch(`${urlIngredientMain}${API_KEY}/filter.php?i=${query}`)
+            if (query !== "") {
+                try {
+                    const ingredientDta = await ingredientMianFeed.json();
+                    setIngredientMain(ingredientDta.meals)
+                } catch (error) {
+                    console.log(error)
                 }
-                else {
-                    setIngredientMain("");
-                }
+            }
+            else {
+                setIngredientMain("");
             }
         }
 
@@ -42,17 +43,23 @@ const SingleIngredientPage = (props) => {
     }, [query])
 
 
+    useEffect(() => {
+
+        const filterByMainIngredient = (!(ingredientList && Object.keys(ingredientList).length)) ? "" : ingredientList.filter(name => name.strIngredient === query);
+        const newDescription = (!filterByMainIngredient.length) ? "" : filterByMainIngredient.map((details) => details.strDescription);
+        newDescription ? setDescription(newDescription) : setDescription(`single Ingredient data`);
+
+    }, [ingredientList, query])
+
+
     if (!(ingredientList && Object.keys(ingredientList).length)) {
         return <Spinner />
     }
 
-    //======= Navigation functions =========
-    const handleClick = () => {
-        history.goBack();
-    }
 
     //======= filter by main ingredient (return single ingredient) =========
-    const filterByMainIngredient = ingredientList.filter(name => name.strIngredient === query);
+    const filterByMainIngredient = (!(ingredientList && Object.keys(ingredientList).length)) ? "" : ingredientList.filter(name => name.strIngredient === query);
+
 
     const detailsCard = filterByMainIngredient.map((details) => {
         return (
@@ -63,26 +70,14 @@ const SingleIngredientPage = (props) => {
         )
     })
 
-    //====== Function to display title  ====== 
-    const title = () => {
-        const ingTitle = filterByMainIngredient.map((details) => details.strIngredient)
-        if (ingTitle) {
-            return `Priscy | ${ingTitle}`
-        } else {
-            return `Priscy | single Ingredient`
-        }
+
+
+    //======= Navigation functions =========
+    const handleClick = () => {
+        history.goBack();
     }
 
 
-    //====== Function to display description  ====== 
-    const description = () => {
-        const ingTitle = filterByMainIngredient.map((details) => details.strDescription)
-        if (ingTitle) {
-            return `${ingTitle.slice(0, 200)}`
-        } else {
-            return `single Ingredient data`
-        }
-    }
 
     //======= list of meals associated with the single ingredient =========
     const foodWithQueryCard = (!(ingredientMain && Object.keys(ingredientMain).length))
@@ -120,8 +115,8 @@ const SingleIngredientPage = (props) => {
             <div className="container">
 
                 <MetaTags>
-                    <title> {title()} </title>
-                    <meta name="description" content={description()} />
+                    <title> Priscy | {query} </title>
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="food-wrapper1">

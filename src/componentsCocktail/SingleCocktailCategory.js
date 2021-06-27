@@ -14,8 +14,8 @@ const SingleCocktailCategory = (props) => {
 
     const [categoryMain, setCategoryMain] = useState("");
     const [paginate, setPaginate] = useState(12);
-    const { useMediaQuery, backgroundArr, queryStyle } = dataSource1();
-    const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
+    const [description, setDescription] = useState('');
+    const { backgroundArr } = dataSource1();
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
     let query = props.location.state
@@ -27,6 +27,15 @@ const SingleCocktailCategory = (props) => {
                 try {
                     const ingredientDta = await categoryMainFeed.json();
                     setCategoryMain(ingredientDta.drinks)
+
+                    const ingTitle = (!(ingredientDta.drinks && Object.keys(ingredientDta.drinks).length))
+                        ? "" : ingredientDta.drinks.map((details) => details.strDrink)
+                    if (!ingTitle) {
+                        setDescription(`single Ingredient data`)
+                    } else {
+                        setDescription(`${ingTitle}`)
+                    }
+
                 } catch (error) {
                     console.log(error)
                 }
@@ -91,29 +100,17 @@ const SingleCocktailCategory = (props) => {
         })
 
 
-
-    //====== Function to display description  ====== 
-    const description = () => {
-        const ingTitle = (!(categoryMain && Object.keys(categoryMain).length))
-            ? "" : categoryMain.map((details) => details.strDrink)
-        if (ingTitle) {
-            return `${ingTitle}`
-        } else {
-            return `single Ingredient data`
-        }
-    }
-
     return (
         <div className="header">
             <div className="container">
 
                 <MetaTags>
                     <title>Priscy | {query}</title>
-                    <meta name="description" content={description().slice(0, 20)} />
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
-                    <div className="query" style={queryStyle.responsive(targetWidth)}><h1>Select From Drinks Category</h1></div>
+                    <div className="query"><h1>Select From Drinks Category</h1></div>
                 </div>
 
                 <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>

@@ -13,6 +13,7 @@ const IngredientMianPage = () => {
 
     const { ingredientList } = dataSource();
     const [display, setDisplay] = useState(false);
+    const [description, setDescription] = useState(`Meal ingredients`);
     const [paginate, setPaginate] = useState(24);
     const { useMediaQuery, backgroundArr, queryStyle } = dataSource1();
     const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
@@ -22,15 +23,28 @@ const IngredientMianPage = () => {
 
     useEffect(() => {
         //====== function for scroll event to check is page is scrolled to the bottom =======//
-
         const scrolltoBottom = () => {
             (window.innerHeight + window.scrollY) >= document.body.offsetHeight ? setDisplay(true) : setDisplay(false);
         }
-
         window.addEventListener('scroll', scrolltoBottom);
         return () => window.removeEventListener('scroll', scrolltoBottom);
 
     }, [])
+
+
+    useEffect(() => {
+        //====== Function to display description  ====== 
+        const description = () => {
+            const ingName = (!(ingredientList && Object.keys(ingredientList).length)) ? "" : ingredientList.map((name) => name.strIngredient)
+            if (!ingName) {
+                setDescription(`Meal ingredients`)
+            } else {
+                setDescription(`${ingName}`)
+            }
+        }
+        description()
+
+    }, [ingredientList])
 
 
     //====== function to load more ingredients =======//
@@ -68,16 +82,6 @@ const IngredientMianPage = () => {
         )
     })
 
-    //====== Function to display description  ====== 
-
-    const description = () => {
-        const ingName = (!(ingredientList && Object.keys(ingredientList).length)) ? "" : ingredientList.map((name) => name.strIngredient)
-        if (ingName) {
-            return `${ingName.slice(0, 30)}`
-        } else {
-            return `Meal ingredients`
-        }
-    }
 
     return (
 
@@ -86,7 +90,7 @@ const IngredientMianPage = () => {
 
                 <MetaTags>
                     <title> Priscy | Meal Recipes </title>
-                    <meta name="description" content={description()} />
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>

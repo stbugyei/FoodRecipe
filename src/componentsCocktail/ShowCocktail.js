@@ -96,10 +96,10 @@ const ShowCocktail = (props) => {
 
     //====== Function to display title  ====== 
     const title = () => {
-        if (drink) {
-            return `How to prepare ${drink.strDrink}`
-        } else {
+        if (!drink) {
             return `Priscy | drink preparation`
+        } else {
+            return `How to prepare ${drink.strDrink}`
         }
     }
 

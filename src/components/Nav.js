@@ -93,7 +93,7 @@ const Nav = (props) => {
                                     </Link>
 
                                     <Link to={{ pathname: "/cocktailingredientmainpage" }} onClick={closeNavBar}>
-                                        <span>Cocktail Ingredients</span>
+                                        <span>drink Ingredients</span>
                                     </Link>
 
                                     <Link to={{ pathname: "/recipes" }} onClick={closeNavBar}>

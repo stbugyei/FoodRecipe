@@ -185,7 +185,7 @@ const FetchRecipes = () => {
 
         generateRandomRecipes();
         randomRecipe();
-    }, [mealCatDiv])
+    }, [])
 
 
 

@@ -16,42 +16,43 @@ const SingleCockIngredientPage = (props) => {
     const { ingredientCockList } = dataSource();
     const [ingredientMain, setIngredientMain] = useState("");
     const [associatDrinks, setAssociatDrinks] = useState("");
+    const [description, setDescription] = useState('single Ingredient data');
     let query = props.location.state
 
     useEffect(() => {
 
         const filterMainIngredient = async () => {
-            if (query) {
-                const ingredientMianFeed = await fetch(`${urlcocktail}${API_KEY}/search.php?i=${query}`)
-                if (ingredientMianFeed.status === 200) {
-                    try {
-                        const ingredientDta = await ingredientMianFeed.json();
-                        setIngredientMain(ingredientDta.ingredients)
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }
-                else {
-                    setIngredientMain("");
+            const ingredientMianFeed = await fetch(`${urlcocktail}${API_KEY}/search.php?i=${query}`)
+            if (query !== "") {
+                try {
+                    const ingredientDta = await ingredientMianFeed.json();
+                    setIngredientMain(ingredientDta.ingredients);
+                    const newDescription = ingredientDta.ingredients.map((des) => (des.strDescription))
+                    setDescription(newDescription)
+                } catch (error) {
+                    console.log(error)
                 }
             }
+            else {
+                setIngredientMain("");
+            }
+
         }
 
 
         const associatedCocktails = async () => {
-            if (query) {
-                const drinksWithQuery = await fetch(`${urlcocktail}/${API_KEY}/filter.php?i=${query}`)
-                if (drinksWithQuery.status === 200) {
-                    try {
-                        const queryDtn = await drinksWithQuery.json();
-                        setAssociatDrinks(queryDtn.drinks)
-                    } catch (error) {
-                        console.log(error)
-                    }
+            const drinksWithQuery = await fetch(`${urlcocktail}/${API_KEY}/filter.php?i=${query}`)
+            if (query !== "") {
+                try {
+                    const queryDtn = await drinksWithQuery.json();
+                    setAssociatDrinks(queryDtn.drinks)
+                    
+                } catch (error) {
+                    console.log(error)
                 }
-                else {
-                    setAssociatDrinks("");
-                }
+            }
+            else {
+                setAssociatDrinks("");
             }
         }
 
@@ -112,36 +113,14 @@ const SingleCockIngredientPage = (props) => {
             )
         })
 
-    //====== Function to display title  ====== 
-    const title = () => {
-        const ingTitle = (!(ingredientMain && Object.keys(ingredientMain).length))
-            ? "" : ingredientMain.map((details) => details.strIngredient)
-        if (ingTitle) {
-            return `Priscy | ${ingTitle}`
-        } else {
-            return `Priscy | single Ingredient`
-        }
-    }
-
-
-    //====== Function to display description  ====== 
-    const description = () => {
-        const ingTitle = (!(ingredientMain && Object.keys(ingredientMain).length))
-            ? "" : ingredientMain.map((details) => details.strDescription)
-        if (ingTitle) {
-            return `${ingTitle}`
-        } else {
-            return `single Ingredient data`
-        }
-    }
 
     return (
         <div className="header">
             <div className="container">
 
                 <MetaTags>
-                    <title> {title()} </title>
-                    <meta name="description" content={description().slice(0, 200)} />
+                    <title> Priscy | {query} </title>
+                    <meta name="description" content={description} />
                 </MetaTags>
 
                 <div className="food-wrapper1">
