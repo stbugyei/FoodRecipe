@@ -15,9 +15,7 @@ const IngredientMianPage = () => {
     const [display, setDisplay] = useState(false);
     const [description, setDescription] = useState(`Meal ingredients`);
     const [paginate, setPaginate] = useState(24);
-    const { useMediaQuery, backgroundArr, queryStyle } = dataSource1();
-    const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
-
+    const { backgroundArr } = dataSource1();
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
 
@@ -94,7 +92,7 @@ const IngredientMianPage = () => {
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
-                    <div className="query1" style={queryStyle.responsive(targetWidth)}><h1>Select from Pool Of Recipes </h1></div>
+                    <div className="query1"><h1>Select from Pool Of Recipes </h1></div>
                 </div>
                 {(!(ingredientList && Object.keys(ingredientList).length)) ? < Spinner /> :
                     <div className="ingredient-front__wrapper">

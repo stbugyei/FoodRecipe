@@ -25,6 +25,7 @@ import SingleCocktailCategory from "../componentsCocktail/SingleCocktailCategory
 import SingleCockIngredientPage from "../componentsCocktail/SingleCockIngredientPage";
 const Footer = lazy(() => import("./Footer"));
 
+
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
     url = `https://www.themealdb.com/api/json/v2/`,
     cocktailUrl = `https://www.thecocktaildb.com/api/json/v2/`;
@@ -310,9 +311,7 @@ const FetchRecipes = () => {
                     </Route>
 
                     <Route path="/alcohol">
-                        <Suspense fallback={<Spinner />}>
-                            <Alcohol alcohol={alcohol} />
-                        </Suspense>
+                        <Alcohol alcohol={alcohol} />
                     </Route>
 
                     <Route exact path="/cocktail">

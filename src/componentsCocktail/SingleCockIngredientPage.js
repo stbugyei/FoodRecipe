@@ -16,7 +16,6 @@ const SingleCockIngredientPage = (props) => {
     const { ingredientCockList } = dataSource();
     const [ingredientMain, setIngredientMain] = useState("");
     const [associatDrinks, setAssociatDrinks] = useState("");
-    const [description, setDescription] = useState('single Ingredient data');
     let query = props.location.state
 
     useEffect(() => {
@@ -27,8 +26,6 @@ const SingleCockIngredientPage = (props) => {
                 try {
                     const ingredientDta = await ingredientMianFeed.json();
                     setIngredientMain(ingredientDta.ingredients);
-                    const newDescription = ingredientDta.ingredients.map((des) => (des.strDescription))
-                    setDescription(newDescription)
                 } catch (error) {
                     console.log(error)
                 }
@@ -120,7 +117,7 @@ const SingleCockIngredientPage = (props) => {
 
                 <MetaTags>
                     <title> Priscy | {query} </title>
-                    <meta name="description" content={description} />
+                    <meta name="description" content="Gin, Rum, Scotch, Tequila, Vodka" />
                 </MetaTags>
 
                 <div className="food-wrapper1">
