@@ -104,18 +104,15 @@
 		position: relative;
 		width: 100%;
 		color: #000;
-		padding: 25px;
+		padding: 23px;
 		border-radius: 0px;
-		font-size: 25px;
+		font-size: 19px;
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-image: url(../image/wel.jpg);
 		text-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
-	}
-
-	.welcome-text h1 {
-		margin: .1em;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}
 
 
@@ -131,10 +128,8 @@
 	}
 
 	.btn-welcome {
-		font-size: 20px;
 		font-weight: 600;
 		text-shadow: none;
-		margin-top: initial;
 		z-index: 999;
 	}
 
