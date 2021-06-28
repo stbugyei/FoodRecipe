@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, withRouter, useHistory } from "react-router-dom";
 import dataSource from '../datasource/DataSource';
 import Spinner from "./Spinner";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const API_KEY = 1
 const urlCtegoryMain = `https://www.themealdb.com/api/json/v1/`
@@ -55,7 +54,7 @@ const CategoryMainPage = (props) => {
     const detailsCard = filterByMainCategory.map((details) => {
         return (
             <div key={details.idCategory} className="single-ingredient">
-                 <img src={details.strCategoryThumb} alt={details.strCategory} />
+                 <img rel="preload" src={details.strCategoryThumb} alt={details.strCategory} as="image"/>
                 <h2>{details.strCategory}</h2>
                 <p>{details.strCategoryDescription}</p>
             </div>
@@ -68,13 +67,7 @@ const CategoryMainPage = (props) => {
             return (
                 <ul className="food-list__card" key={categoryMain[index].idMeal}>
                     <li className="food-list__poster">
-                        <LazyLoadImage
-                            alt={meal.strMeal}
-                            effect="blur"
-                            src={meal.strMealThumb}
-                            style={{ transition: 'all .3s', width:'100%', height:'100%' }}
-                            className="lazyimg"
-                        />
+                        <img rel="preload" src={meal.strMealThumb}  alt={meal.strMeal} as="image"/>
                     </li>
                     <div className="title-discover">
                         <li>

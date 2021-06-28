@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import dataSource from '../datasource/DataSource';
 import dataSource1 from '../datasource/formstyles';
 import countryData from '../datasource/countryArray';
@@ -14,8 +12,8 @@ const MealsByCountry = () => {
     const [description, setDescription] = useState('');
     const { mealCountryInfo, countryInfo } = dataSource();
     const { countryList } = countryData();
-    const { useMediaQuery, backgroundArr, queryStyle } = dataSource1();
-    const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
+    const { backgroundArr} = dataSource1();
+   
 
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
@@ -59,13 +57,8 @@ const MealsByCountry = () => {
                         pathname: `/singlecountrypage/${name.strArea}`,
                         state: `${name.strArea}`
                     }}>
-                        <LazyLoadImage
-                            alt={countryFlagFromRest(name.strArea)}
-                            effect="blur"
-                            src={name.strArea === 'Unknown' ? option : countryFlagFromRest(name.strArea)}
-                            style={{ transition: 'all .3s', width: '100px', height: '100px' }}
-                            className="lazyimg"
-                        />
+                        <img rel="preload" src={name.strArea === 'Unknown' ? option : countryFlagFromRest(name.strArea)} alt={countryFlagFromRest(name.strArea)} as="image" style={{ transition: 'all .3s', width: '100px', height:'65px', objectFit:'cover', objectPosition:'bottom' }} />
+
                         <figcaption>
                             {name.strArea}
                         </figcaption>
@@ -85,7 +78,7 @@ const MealsByCountry = () => {
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
-                    <div className="query" style={queryStyle.responsive(targetWidth)}><h1>Let's Go Continental</h1></div>
+                    <div className="query"><h1>Let's Go Continental</h1></div>
                 </div>
 
                 <div className="ingredient-front__wrapper">

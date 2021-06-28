@@ -243,7 +243,6 @@ figure:hover img {
 	transition: all .3s;
 }
 
-
 .food-details__ingredients::before {
 	position: absolute;
 	content: "";
@@ -330,7 +329,7 @@ figure:hover img {
 }
 
 .btn-show__details {
-	font-family: 'Poppins', sans-serif;
+	font-family: inherit;
 	font-size: 16px;
 	width: 6%;
 	position: absolute;
@@ -400,59 +399,42 @@ figure:hover img {
 }
 
 .thumbnailCard {
-	width: 125px;
+	width: 100px;
 	height: auto;
 	cursor: pointer;
 	transition: all .3s;
 	animation: .3s btnzoom1;
 }
 
-.thumbnailCard a {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-}
 
 .thumbnailCard:hover .thumbnail-plate img {
 	transform: scale(1.3);
-	transition: .3s;
+	transition: all .3s;
 }
 
 .thumbnailCard:hover .thumbnail-plate1 img {
 	transform: scale(1.3);
-	transition: .3s;
+	transition: all .3s;
 }
 
 .thumbnail-plate,
 .thumbnail-plate1,
 .thumbnail-plate2 {
 	position: relative;
-	width: 100%;
-	height: 125px;
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px;
-	border-radius: 50%;
-	justify-content: center;
-	background-color: transparent;
-	background-image: url(/src/image/plate2.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: auto;
-	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
+	text-align: center;
+    margin-bottom: 10px;
+    background-color: transparent;
+    transition: all .3s;
+}
+
+.thumbnail-plate img,
+.thumbnail-plate1 img,
+.thumbnail-plate2 img{
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	object-position: bottom;
 	transition: all .3s;
-}
-
-
-.thumbnail-plate {
-	background-image: none;
-	box-shadow: none;
-}
-
-.thumbnail-plate1 {
-	background-image: url(/src/image/plate.png);
 }
 
 .thumbnail-plate2 {
@@ -462,7 +444,6 @@ figure:hover img {
 	border: 1px solid #9fa8da;
 	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
 }
-
 
 .load-ingredient,
 .load-ingredient1 {
@@ -493,6 +474,7 @@ figure:hover img {
 	color: initial;
 	border-color: initial;
 	box-shadow: none;
+	transition: all .3s;
 }
 
 .food-wrapper1 {
@@ -509,7 +491,6 @@ figure:hover img {
 	width: 30%;
 	z-index: 99;
 }
-
 
 .single-detail__wrapper {
 	position: relative;
@@ -549,9 +530,9 @@ figure:hover img {
 	border-radius: 5px;
 	cursor: pointer;
 	transform-origin: bottom;
-	text-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%); 
+	text-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
 	background-color: #cbcbec;
-    box-shadow: 0px 10px 20px rgb(0 0 0 / 9%);
+	box-shadow: 0px 10px 20px rgb(0 0 0 / 9%);
 	transition: all .6s;
 }
 

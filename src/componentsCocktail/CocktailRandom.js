@@ -1,9 +1,6 @@
 import React from 'react'
 import { withRouter, Link } from "react-router-dom";
 import '../styles/random.css'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
-import option from '../image/option.svg'
 import Spinner from '../components/Spinner';
 
 const CocktailRandom = (props) => {
@@ -26,15 +23,7 @@ const CocktailRandom = (props) => {
             <div className="image-details__wrapper">
                 <div className="image-details">
                     <div className="random-list__poster">
-                        <LazyLoadImage
-                            alt={randomCocktail[0].strDrinkThumb}
-                            effect="blur"
-                            src={randomCocktail[0].strDrinkThumb}
-                            placeholderSrc={option}
-                            style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                            className="lazyimg"
-
-                        />
+                        <img rel="preload" src={randomCocktail[0].strDrinkThumb} alt={randomCocktail[0].strDrinkThumb} as="image" />
                     </div>
 
                     <div className="title-button">

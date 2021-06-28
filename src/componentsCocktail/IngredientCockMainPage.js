@@ -3,31 +3,18 @@ import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import dataSource from '../datasource/DataSource';
 import dataSource1 from '../datasource/formstyles';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import Spinner from "../components/Spinner";
 
 const url5 = `https://www.thecocktaildb.com/images/ingredients/`
 
 const IngredientCockMainPage = () => {
+    
     const { ingredientCockList } = dataSource();
-    const [display, setDisplay] = useState(false);
     const [paginate, setPaginate] = useState(24);
     const [description, setDescription] = useState(`Meal ingredients`);
     const { backgroundArr } = dataSource1();
-   
+
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
-
-    useEffect(() => {
-        //====== function for scroll event to check is page is scrolled to the bottom =======//
-        const scrolltoBottom = () => {
-            (window.innerHeight + window.scrollY) >= document.body.offsetHeight ? setDisplay(true) : setDisplay(false);
-        }
-
-        window.addEventListener('scroll', scrolltoBottom);
-        return () => window.removeEventListener('scroll', scrolltoBottom);
-
-    }, [])
 
 
     useEffect(() => {
@@ -45,16 +32,6 @@ const IngredientCockMainPage = () => {
     }, [ingredientCockList])
 
 
-    //====== function to load more ingredients =======//
-    const loadMoreIngredients = () => {
-        setPaginate((prevValue) => prevValue + 24)
-    }
-
-    //========== A Style function to change the visibility of the scroll button ===========//
-    const scrollVisibility = () => {
-        return { transform: display ? 'scale(1)' : 'scale(0)' };
-    }
-
 
     const thumbnailTitleCard = (!(ingredientCockList && Object.keys(ingredientCockList).length)) ? "" : ingredientCockList.slice(0, paginate).map((images, index) => {
         return (
@@ -64,13 +41,7 @@ const IngredientCockMainPage = () => {
                     state: `${images.strIngredient1}`
                 }}>
                     <div className="thumbnail-plate">
-                    <LazyLoadImage
-                          alt={images.strIngredient1}
-                            effect="blur"
-                            src={`${url5}/${images.strIngredient1}-Small.png`}
-                            style={{ transition: 'all .3s', width: '100px', height: '100px'}}
-                            className="lazyimg"
-                        />
+                        <img rel="preload" src={`${url5}/${images.strIngredient1}-Small.png`} alt={images.strIngredient1} as="image" />
                     </div>
                     <figcaption>
                         {images.strIngredient1}
@@ -100,7 +71,7 @@ const IngredientCockMainPage = () => {
                             {thumbnailTitleCard}
                         </div>
 
-                        <button className={paginate > ingredientCockList.length && display ? "hide" : "loadmore-btn"} onClick={() => loadMoreIngredients()} style={scrollVisibility()}>Load More Ingredients</button>
+                        <button className={paginate > ingredientCockList.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Recipes</button>
                     </div>
                 }
             </div>

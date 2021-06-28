@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap');
 
 
 *,
@@ -38,14 +35,14 @@ code {
 }
 
 a:link,
-a:active, 
+a:active,
 a:visited {
 	list-style: none;
 	text-decoration: none;
 	color: inherit;
 }
 
-.main-wrapper{
+.main-wrapper {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;	
@@ -53,7 +50,7 @@ a:visited {
 
 .main-content {
 	flex: 1;
-  }
+}
 
 .container {
 	width: 1200px;
@@ -239,7 +236,6 @@ a:visited {
 		transform: translate(0);
 	}
 }
-
 
 @media (max-width: 1200px) {
 	.container {

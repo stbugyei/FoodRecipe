@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link, withRouter, useHistory } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import dataSource from '../datasource/DataSource';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import Spinner from "./Spinner";
 
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
@@ -85,13 +83,7 @@ const SingleIngredientPage = (props) => {
             return (
                 <div className="food-list__card" key={ingredientMain[index].idMeal}>
                     <div className="food-list__poster">
-                        <LazyLoadImage
-                            alt={meal.strMeal}
-                            effect="blur"
-                            src={meal.strMealThumb}
-                            style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                            className="lazyimg"
-                        />
+                        <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} style={{ transition: 'all .3s', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
                     </div>
                     <div className="title-discover">
                         <div>
@@ -123,7 +115,7 @@ const SingleIngredientPage = (props) => {
                     <button className="btn-navigate__back" onClick={handleClick}><i className="fas fa-arrow-left"></i></button>
                     <div className="food-header__content1" style={{ marginTop: '10px' }}>
                         <div className="single-detail__wrapper">
-                            <img src={`${url5}/${query}.png`} alt={query} />
+                            <img rel="preload" src={`${url5}/${query}.png`} alt={query} as="image" />
                             {detailsCard}
                         </div>
                     </div>

@@ -70,7 +70,6 @@
 	transition: all .3s;
 }
 
-
 .latest-list__card {
 	position: relative;
 	width: 44%;
@@ -92,10 +91,18 @@
 	display: flex;
 	overflow: hidden;
 	margin: 0px 5px 5px 0px;
-    padding: 6px 0px 0px 6px;
+	padding: 6px 0px 0px 6px;
 	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
 	transition: all .3s;
 	animation: verticalSlide .5s;
+}
+
+.latest-list__card1 img {
+	width: 100%;
+	height: 141px;
+	border-radius: 4px;
+	object-fit: cover;
+	object-position: bottom;
 }
 
 .latest-list__card:hover {
@@ -127,6 +134,13 @@
 	position: relative;
 }
 
+.latest-list__poster img {
+	width: 100%;
+	height: 100px;
+	object-fit: cover;
+	object-position: bottom;
+	border-radius: 4px;
+}
 
 .latest-title__discover {
 	width: 60%;
@@ -149,7 +163,6 @@
 	text-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
 }
 
-
 .latest-title__discover small {
 	color: #ff5550;
 	font-size: 15px;
@@ -168,7 +181,6 @@
 	justify-content: space-between;
 	background-color: #fff;
 	border-radius: 100px 20px 20px 100px;
-	background-image: linear-gradient(to right top, #e3e3e3, #eaeaea, #f1f1f1, #f8f8f8, #ffffff);
 	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 1px 2px rgb(0 0 0 / 23%);
 	transition: all .3s;
 }
@@ -198,7 +210,11 @@
 }
 
 .category-list__img img {
-	border-radius: 50%;
+	width: 100%;
+	height: 45px;
+	object-fit: cover;
+	object-position: bottom;
+	border-radius: 4px;
 }
 
 .category-list__content {
@@ -247,7 +263,6 @@
 	border-radius: 4px 100px 100px 4px;
 }
 
-
 .pop-card {
 	display: inline-block;
 	text-align: center;
@@ -284,6 +299,7 @@
 }
 
 .pop-card__imgwrapper img {
+	width: 200px;
 	height: 200px;
 	transform: skew(0deg, -15deg);
 	margin: -20px 0px 0px -24px;

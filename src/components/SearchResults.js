@@ -3,8 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import dataSource from '../datasource/formstyles';
 import '../styles/search.css'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 const SearchResults = (props) => {
@@ -54,13 +52,7 @@ const SearchResults = (props) => {
                                     <div className="food-list__card" key={recipe[index].idMeal}>
 
                                         <div className="food-list__poster">
-                                            <LazyLoadImage
-                                                alt={meal.strMeal}
-                                                effect="blur"
-                                                src={meal.strMealThumb}
-                                                style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                                                className="lazyimg"
-                                            />
+                                            <img  src={meal.strMealThumb} alt={meal.strMeal} />
                                         </div>
 
                                         <div className="title-discover">

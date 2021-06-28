@@ -184,7 +184,7 @@ ul.alert-box {
 
 .btn-close {
 	float: right;
-	font-family: 'Poppins', sans-serif;
+	font-family: inherit;
 	outline: none;
 	width: 35px;
 	height: 35px;

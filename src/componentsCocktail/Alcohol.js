@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import '../styles/search.css'
 import Loader from '../components/Loader';
 import videoURL from '../video/alchohol.mp4'
@@ -13,20 +11,6 @@ const Alcohol = (props) => {
 
     const { alcohol } = props
     const [paginate, setPaginate] = useState(24);
-
-    useEffect(() => {
-
-        //====== function to load more ingredients =======//
-        const displaxNextList = () => {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                setPaginate((prevValue) => prevValue + 24)
-            }
-        }
-
-        window.addEventListener('scroll', displaxNextList);
-        return () => window.removeEventListener('scroll', displaxNextList);
-
-    }, [])
 
 
     if (!(alcohol && Object.keys(alcohol).length)) {
@@ -39,13 +23,7 @@ const Alcohol = (props) => {
             <div className="food-list__card" key={alcohol[index].idDrink}>
 
                 <div className="food-list__poster">
-                    <LazyLoadImage
-                        alt={drink.strDrink}
-                        effect="blur"
-                        src={drink.strDrinkThumb}
-                        style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                        className="lazyimg"
-                    />
+                    <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} as="image" />
                 </div>
 
                 <div className="title-discover">
@@ -85,6 +63,8 @@ const Alcohol = (props) => {
                 <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
                     {alcoholCard}
                 </div>
+
+                <button className={paginate > alcohol.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
             </div>
         </div>
     )

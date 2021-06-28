@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
 import '../styles/welcome.css'
-import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const Welcome = () => {
 

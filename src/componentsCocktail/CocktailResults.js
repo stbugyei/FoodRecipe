@@ -3,14 +3,12 @@ import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import dataSource from '../datasource/formstyles';
 import '../styles/search.css';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const CocktailResults = (props) => {
 
     const { cocktail, errorDrinks, handleOnChange, handleOnSubmit } = props
     const { backgroundArr, alcohol } = dataSource();
-    //const targetWidth = useMediaQuery('screen and (min-width: 320px) and (max-width: 780px)');
     const storedQuery = localStorage.getItem("cockQuery");
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
@@ -52,13 +50,7 @@ const CocktailResults = (props) => {
                                     <div className="food-list__card" key={cocktail[index].idDrink}>
 
                                         <div className="food-list__poster">
-                                            <LazyLoadImage
-                                                alt={drink.strDrink}
-                                                effect="blur"
-                                                src={drink.strDrinkThumb}
-                                                style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                                                className="lazyimg"
-                                            />
+                                            <img src={drink.strDrinkThumb} alt={drink.strDrink} />
                                             <span style={alcohol}>{drink.strAlcoholic}</span>
                                         </div>
 

@@ -3,8 +3,7 @@ import { Link, withRouter, useHistory } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import dataSource from '../datasource/DataSource';
 import Spinner from "../components/Spinner";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
     urlcocktail = `https://www.thecocktaildb.com/api/json/v2/`,
@@ -43,7 +42,7 @@ const SingleCockIngredientPage = (props) => {
                 try {
                     const queryDtn = await drinksWithQuery.json();
                     setAssociatDrinks(queryDtn.drinks)
-                    
+
                 } catch (error) {
                     console.log(error)
                 }
@@ -86,13 +85,7 @@ const SingleCockIngredientPage = (props) => {
                 <div className="food-list__card" key={associatDrinks[index].idDrink}>
 
                     <div className="food-list__poster">
-                        <LazyLoadImage
-                            alt={drink.strDrink}
-                            effect="blur"
-                            src={drink.strDrinkThumb}
-                            style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                            className="lazyimg"
-                        />
+                        <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
                     </div>
 
                     <div className="title-discover">

@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter, Link } from "react-router-dom";
 import dataSource from '../datasource/DataSource';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 const FrontPageCockCategories = () => {
@@ -24,14 +22,7 @@ const FrontPageCockCategories = () => {
                         <div className="pop-card__imgwrapper">
                             <div className="pop-card__imginner">
                                 <div className="pop-card__skew">
-                                    <LazyLoadImage
-                                        rel="preload"
-                                        as="image"
-                                        alt={drink.strDrink}
-                                        effect="blur"
-                                        src={drink.strDrinkThumb}
-                                        style={{ transition: 'all .3s', width: '200px', height: '200px', borderRadius: '5px' }}
-                                    />
+                                    <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} as="image" />
                                 </div>
                             </div>
                         </div>
@@ -57,15 +48,7 @@ const FrontPageCockCategories = () => {
                         pathname: `/drinks/${recentDrinks[index].idDrink}/${drink.strDrink}`
                     }}>
                         <div className="latest-list__poster">
-                            <LazyLoadImage
-                                rel="preload"
-                                as="image"
-                                alt={drink.strDrink}
-                                effect="blur"
-                                src={drink.strDrinkThumb}
-                                style={{ transition: 'all .3s', width: '100%', height: '100%', borderRadius: '5px' }}
-                                className="lazyimg"
-                            />
+                            <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} as="image" />
                         </div>
 
                         <div className="latest-title__discover">

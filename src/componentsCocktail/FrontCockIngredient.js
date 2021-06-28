@@ -1,7 +1,5 @@
 import { Link, withRouter } from "react-router-dom";
 import dataSource from '../datasource/DataSource';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import Spinner from "../components/Spinner";
 
 const url5 = `https://www.thecocktaildb.com/images/ingredients/`
@@ -22,13 +20,7 @@ const FrontCockIngredient = () => {
                     state: `${images.strIngredient1}`
                 }}>
                     <div className="thumbnail-plate">
-                        <LazyLoadImage
-                            alt={images.strIngredient1}
-                            effect="blur"
-                            src={`${url5}/${images.strIngredient1}-Small.png`}
-                            style={{ transition: 'all .3s', width: '100px', height: '100px' }}
-                            className="lazyimg"
-                        />
+                    <img rel="preload"  src={`${url5}/${images.strIngredient1}-Small.png`} alt={images.strIngredient1} as="image" />
                     </div>
                     <figcaption>
                         {images.strIngredient1}

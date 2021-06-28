@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Route, Switch, withRouter, useHistory, useLocation } from "react-router-dom";
 import Nav from "./Nav";
 import Main from "./Main"
+import Footer from "./Footer";
 import Loader from './Loader';
-import Spinner from "./Spinner";
 import Welcome from "./Welcome";
 import ShowFood from "./ShowFood";
 import FavouriteList from "./FavouriteList";
@@ -23,7 +23,7 @@ import CocktailResults from '../componentsCocktail/CocktailResults';
 import IngredientCockMainPage from "../componentsCocktail/IngredientCockMainPage";
 import SingleCocktailCategory from "../componentsCocktail/SingleCocktailCategory";
 import SingleCockIngredientPage from "../componentsCocktail/SingleCockIngredientPage";
-const Footer = lazy(() => import("./Footer"));
+
 
 
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
@@ -370,9 +370,7 @@ const FetchRecipes = () => {
                     </Route>
                 </Switch>
             </div>
-            <Suspense fallback={<Spinner />}>
-                <Footer />
-            </Suspense>
+            <Footer />
         </div>
     )
 }

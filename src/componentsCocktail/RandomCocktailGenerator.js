@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Link, withRouter } from "react-router-dom";
 import '../styles/search.css'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const RandomCocktailGenerator = (props) => {
 
@@ -33,13 +31,7 @@ const RandomCocktailGenerator = (props) => {
             <div className="food-list__card" key={randomCocktailGenerator[index].idDrink}>
 
                 <div className="food-list__poster">
-                    <LazyLoadImage
-                        alt={drink.strDrink}
-                        effect="blur"
-                        src={drink.strDrinkThumb}
-                        style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                        className="lazyimg"
-                    />
+                    <img src={drink.strDrinkThumb} alt={drink.strDrink} />
                     <span style={alcohol}>{drink.strAlcoholic}</span>
                 </div>
 

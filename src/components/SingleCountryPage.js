@@ -3,8 +3,6 @@ import { Link, withRouter, useHistory } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import dataSource from '../datasource/DataSource';
 import countryData from '../datasource/countryArray';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import Spinner from "./Spinner";
 import option from '../image/option.svg'
 
@@ -89,13 +87,7 @@ const SingleCountryPage = (props) => {
             return (
                 <div className="food-list__card" key={countryMain[index].idMeal}>
                     <div className="food-list__poster">
-                        <LazyLoadImage
-                            alt={meal.strMeal}
-                            effect="blur"
-                            src={meal.strMealThumb}
-                            style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
-                            className="lazyimg"
-                        />
+                        <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} as="image"/>
                     </div>
                     <div className="title-discover">
                         <div>
@@ -127,7 +119,7 @@ const SingleCountryPage = (props) => {
                     <button className="btn-navigate__back" onClick={handleClick}><i className="fas fa-arrow-left"></i></button>
                     <div className="food-header__content1" style={{ marginTop: '10px' }}>
                         <div className="single-detail__wrapper">
-                            <img src={query === 'Unknown' ? option : countryFlagFromRest()} alt={query} style={{ borderRadius: '5px' }} />
+                            <img rel="preload" src={query === 'Unknown' ? option : countryFlagFromRest()} alt={query} style={{ borderRadius: '5px' }} as="image" />
                         </div>
                     </div>
 
