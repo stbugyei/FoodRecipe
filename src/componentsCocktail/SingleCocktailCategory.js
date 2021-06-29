@@ -53,7 +53,7 @@ const SingleCocktailCategory = (props) => {
         //====== function to load more ingredients =======//
         const displaxNextList = () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                setPaginate((prevValue) => prevValue + 24)
+                setPaginate((prevValue) => prevValue + 12)
             }
         }
 
@@ -102,12 +102,14 @@ const SingleCocktailCategory = (props) => {
                 </MetaTags>
 
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
-                    <div className="query"><h1>Select From Drinks Category</h1></div>
+                    <div className="query"><h1>Collections from {query}</h1></div>
                 </div>
 
                 <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
                     {drinksWithQueryCard}
                 </div>
+
+                <button className={paginate > categoryMain.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 12)} style={{ marginTop: '25px 12px' }}>Load More Drinks</button>
             </div>
         </div>
     )

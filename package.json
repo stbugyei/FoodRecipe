@@ -16,11 +16,11 @@
 		"web-vitals": "^0.2.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"start-client": "react-scripts start",
 		"build": "react-scripts build && echo '/*    /index.html   200' > build/_redirects",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"postbuild": "react-snap"
+		"start": "npm run build && (cd cuisine-server && npm start)"
 	},
 	"eslintConfig": {
 		"extends": [ "react-app", "react-app/jest" ]
