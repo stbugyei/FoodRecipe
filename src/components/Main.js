@@ -7,6 +7,7 @@ import Random from './Random'
 import FrontPageIngredients from "./FrontPageIngredients"
 import FrontPageCategories from "./FrontPageCategories"
 import RandomGenerator from "./RandomGenerator"
+import RecentTrending from "./RecentTrending";
 
 
 const Main = (props) => {
@@ -37,6 +38,7 @@ const Main = (props) => {
                         <li className="search-wrapper">
                             <FrontPageIngredients />
                             <FrontPageCategories mealCatDiv={mealCatDiv} />
+                            <RecentTrending/>
                             <RandomGenerator randomRecipeGenerator={randomRecipeGenerator} errorRecipeGenerator={errorRecipeGenerator} />
                         </li>
                     </ul>

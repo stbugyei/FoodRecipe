@@ -6,6 +6,7 @@ import CocktailRandom from "./CocktailRandom";
 import FrontCockIngredient from "./FrontCockIngredient";
 import FrontPageCockCategories from "./FrontPageCockCategories";
 import RandomCocktailGenerator from "./RandomCocktailGenerator";
+import CockRecentlyAdded from './CockRecentlyAdded';
 
 
 const CocktailMain = (props) => {
@@ -30,14 +31,15 @@ const CocktailMain = (props) => {
                             </div>
 
                             <div className="random-wrapper">
-                                    <CocktailRandom randomCocktail={randomCocktail} randError={randError} />
+                                <CocktailRandom randomCocktail={randomCocktail} randError={randError} />
                             </div>
                         </li>
 
                         <li className="search-wrapper">
-                               <FrontCockIngredient />
-                                <FrontPageCockCategories />
-                                 <RandomCocktailGenerator randomCocktailGenerator={randomCocktailGenerator} errorCocktailGenerator={errorCocktailGenerator} />
+                            <FrontCockIngredient />
+                            <FrontPageCockCategories />
+                            <CockRecentlyAdded />
+                            <RandomCocktailGenerator randomCocktailGenerator={randomCocktailGenerator} errorCocktailGenerator={errorCocktailGenerator} />
                         </li>
                     </ul>
                 </div>

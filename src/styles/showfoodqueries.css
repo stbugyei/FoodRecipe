@@ -30,18 +30,17 @@
 	.categorycoc-front__wrapper {
 		padding: initial;
 	}
-	.categorycoc-latest__wrapper h1 {
-		margin: 20px 0px 20px;
-	}
 
-	.category-front__wrapper h1 {
-		margin: 25px 0px 25px;
-	}
 
 	.category-front__wrapper,
 	.latest__wrapper {
 		width: 100%;
 		padding: initial;
+	}
+
+
+	.category-front__wrapper {
+		padding: 10px;
 	}
 
 	.category-list__card {
@@ -176,7 +175,6 @@
 
 	.background-video__text {
 		top: -9%;
-		/* font-size: 35px; */
 	}
 
 	.background-video__text1 {
@@ -230,7 +228,7 @@
 	}
 
 	.latest-list__card1 {
-		width: 47%;
+		width: 44%;
 	}
 
 	.pop-card {
@@ -317,9 +315,6 @@
 		padding: initial;
 	}
 
-	.category-list__img img {
-		height: 28px;
-	}
 }
 
 @media screen and (min-width: 540px) and (max-width: 888px) {
