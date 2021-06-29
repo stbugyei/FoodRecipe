@@ -1,15 +1,18 @@
 const path = require("path");
 const express = require("express");
-const cors = require('cors')
+const cors = require('cors');
 
 const app = express(); // create express app
 
+// Use prerender io middleware 
+//app.use(prerender.set('prerenderToken', 'iw6KzzunJODdprq82fjU'));
+
 app.use(cors())
 
+// Load from env vars
 const port = process.env.PORT || 5000;
 
 // add middlewares
-app.use(require('prerender-node').set('prerenderToken', 'iw6KzzunJODdprq82fjU'));
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 
