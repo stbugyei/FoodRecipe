@@ -4,9 +4,9 @@ const fetch = require("node-fetch");
 const cors = require('cors');
 
 const NodeCache = require("node-cache");
-const myCache = new NodeCache( { stdTTL: 3600, checkperiod: 3000 } );
+const myCache = new NodeCache({ stdTTL: 3600, checkperiod: 3000 });
 // Load from env vars
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 const compression = require("compression");
 const BUILD_PATH = "public";
@@ -19,37 +19,37 @@ const app = express(); // create express app
 
 //====catch policy functions static files====//
 function setNoCache(res) {
-  const date = new Date();
-  date.setFullYear(date.getFullYear() - 1);
-  res.setHeader("Expires", date.toUTCString());
-  res.setHeader("Pragma", "no-cache");
-  res.setHeader("Cache-Control", "public, no-cache");
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 1);
+    res.setHeader("Expires", date.toUTCString());
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Cache-Control", "public, no-cache");
 }
 
 function setLongTermCache(res) {
-  const date = new Date();
-  date.setFullYear(date.getFullYear() + 1);
-  res.setHeader("Expires", date.toUTCString());
-  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
+    res.setHeader("Expires", date.toUTCString());
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
 }
 
 app.use(compression());
 
 app.use(
-  express.static(BUILD_PATH, {
-    extensions: ["htm", "html"],
-    setHeaders(res, path) {
-      if (path.match(/(\.html|\/sw\.js)$/)) {
-        setNoCache(res);
-        return;
-      }
+    express.static(BUILD_PATH, {
+        extensions: ["htm", "html"],
+        setHeaders(res, path) {
+            if (path.match(/(\.html|\/sw\.js)$/)) {
+                setNoCache(res);
+                return;
+            }
 
-      if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|json)$/)) {
-        setLongTermCache(res);
-        console.log('I matched')
-      }
-    },
-  }),
+            if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|json)$/)) {
+                setLongTermCache(res);
+                console.log('I matched')
+            }
+        },
+    }),
 );
 
 const KEY = 9973533
@@ -75,7 +75,7 @@ app.get('/ingredientList', (req, res) => {
 
 
 //categoryList
-app.get('/categoryList', (req, res) => { 
+app.get('/categoryList', (req, res) => {
     if (myCache.has("categoryList")) {
         return res.send(myCache.get("categoryList"));
 
@@ -91,7 +91,7 @@ app.get('/categoryList', (req, res) => {
 
 
 //recentMeal
-app.get('/recentMeal', (req, res) => { 
+app.get('/recentMeal', (req, res) => {
     if (myCache.has("recentMeal")) {
         return res.send(myCache.get("recentMeal"));
 
@@ -107,7 +107,7 @@ app.get('/recentMeal', (req, res) => {
 
 
 //ingredientCockList
-app.get('/ingredientCockList', (req, res) => { 
+app.get('/ingredientCockList', (req, res) => {
     if (myCache.has("ingredientCockList")) {
         return res.send(myCache.get("ingredientCockList"));
 
@@ -123,7 +123,7 @@ app.get('/ingredientCockList', (req, res) => {
 
 
 //popularCockList
-app.get('/popularCockList', (req, res) => { 
+app.get('/popularCockList', (req, res) => {
     if (myCache.has("popularCockList")) {
         return res.send(myCache.get("popularCockList"));
 
@@ -139,7 +139,7 @@ app.get('/popularCockList', (req, res) => {
 
 
 //recentDrinks
-app.get('/recentDrinks', (req, res) => { 
+app.get('/recentDrinks', (req, res) => {
     if (myCache.has("recentDrinks")) {
         return res.send(myCache.get("recentDrinks"));
 
@@ -155,7 +155,7 @@ app.get('/recentDrinks', (req, res) => {
 
 
 //countryInfo
-app.get('/countryInfo', (req, res) => { 
+app.get('/countryInfo', (req, res) => {
     if (myCache.has("countryInfo")) {
         return res.send(myCache.get("countryInfo"));
 
@@ -171,7 +171,7 @@ app.get('/countryInfo', (req, res) => {
 
 
 //mealCountryInfo
-app.get('/mealCountryInfo', (req, res) => { 
+app.get('/mealCountryInfo', (req, res) => {
     if (myCache.has("mealCountryInfo")) {
         return res.send(myCache.get("mealCountryInfo"));
 
@@ -187,7 +187,7 @@ app.get('/mealCountryInfo', (req, res) => {
 
 
 //alcohol
-app.get('/alcohol', (req, res) => { 
+app.get('/alcohol', (req, res) => {
     if (myCache.has("alcohol")) {
         return res.send(myCache.get("alcohol"));
 
@@ -203,7 +203,7 @@ app.get('/alcohol', (req, res) => {
 
 
 //nonAlcohol
-app.get('/nonAlcohol', (req, res) => { 
+app.get('/nonAlcohol', (req, res) => {
     if (myCache.has("nonAlcohol")) {
         return res.send(myCache.get("nonAlcohol"));
 
@@ -219,7 +219,7 @@ app.get('/nonAlcohol', (req, res) => {
 
 
 //randomCocktailGenerator
-app.get('/randomCocktailGenerator', (req, res) => { 
+app.get('/randomCocktailGenerator', (req, res) => {
     if (myCache.has("randomCocktailGenerator")) {
         return res.send(myCache.get("randomCocktailGenerator"));
 
@@ -235,7 +235,7 @@ app.get('/randomCocktailGenerator', (req, res) => {
 
 
 //randomCocktail
-app.get('/randomCocktail', (req, res) => { 
+app.get('/randomCocktail', (req, res) => {
     if (myCache.has("randomCocktail")) {
         return res.send(myCache.get("randomCocktail"));
 
@@ -251,7 +251,7 @@ app.get('/randomCocktail', (req, res) => {
 
 
 //randomRecipe
-app.get('/randomRecipe', (req, res) => { 
+app.get('/randomRecipe', (req, res) => {
     if (myCache.has("randomRecipe")) {
         return res.send(myCache.get("randomRecipe"));
 
@@ -267,7 +267,7 @@ app.get('/randomRecipe', (req, res) => {
 
 
 //randomRecipeGenerator
-app.get('/randomRecipeGenerator', (req, res) => { 
+app.get('/randomRecipeGenerator', (req, res) => {
     if (myCache.has("randomRecipeGenerator")) {
         return res.send(myCache.get("randomRecipeGenerator"));
 
@@ -291,18 +291,18 @@ app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 
 app.get("*", (req, res) => {
-  setNoCache(res);
-  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+    setNoCache(res);
+    res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
 
 
 // start express server on port 5000
 app.listen(port, () => {
-  console.log("server started on port 5000");
+    console.log("server started on port 5000");
 });
 
