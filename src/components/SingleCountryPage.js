@@ -12,7 +12,6 @@ const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
 const SingleCountryPage = (props) => {
 
     const history = useHistory();
-
     const { mealCountryInfo, countryInfo } = dataSource();
     const { countryList } = countryData();
     const [countryMain, setCountryMain] = useState("");
@@ -37,10 +36,11 @@ const SingleCountryPage = (props) => {
                 }
             }
         }
-
         filterMainCountry();
 
     }, [query])
+
+
 
 
     useEffect(() => {
@@ -87,7 +87,7 @@ const SingleCountryPage = (props) => {
             return (
                 <div className="food-list__card" key={countryMain[index].idMeal}>
                     <div className="food-list__poster">
-                        <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} as="image"/>
+                        <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} as="image" />
                     </div>
                     <div className="title-discover">
                         <div>

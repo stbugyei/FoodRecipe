@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import MetaTags from 'react-meta-tags';
 import '../styles/main.css'
@@ -31,14 +31,14 @@ const Main = (props) => {
                             </div>
 
                             <div className="random-wrapper">
-                                <Random randomRecipe={randomRecipe} randError={randError} />
+                                <Random randError={randError} randomRecipe={randomRecipe}/>
                             </div>
                         </li>
 
                         <li className="search-wrapper">
                             <FrontPageIngredients />
                             <FrontPageCategories mealCatDiv={mealCatDiv} />
-                            <RecentTrending/>
+                            <RecentTrending />
                             <RandomGenerator randomRecipeGenerator={randomRecipeGenerator} errorRecipeGenerator={errorRecipeGenerator} />
                         </li>
                     </ul>

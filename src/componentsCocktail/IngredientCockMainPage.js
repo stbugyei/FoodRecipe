@@ -8,13 +8,14 @@ import Spinner from "../components/Spinner";
 const url5 = `https://www.thecocktaildb.com/images/ingredients/`
 
 const IngredientCockMainPage = () => {
-    
+
     const { ingredientCockList } = dataSource();
     const [paginate, setPaginate] = useState(24);
     const [description, setDescription] = useState(`Meal ingredients`);
     const { backgroundArr } = dataSource1();
 
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
+
 
 
     useEffect(() => {
@@ -24,13 +25,12 @@ const IngredientCockMainPage = () => {
             if (!ingName) {
                 setDescription(`Meal ingredients`)
             } else {
-                setDescription(`${ingName}`)
+                setDescription((ingName).slice(0, 25).join(', '))
             }
         }
         description();
 
     }, [ingredientCockList])
-
 
 
     const thumbnailTitleCard = (!(ingredientCockList && Object.keys(ingredientCockList).length)) ? "" : ingredientCockList.slice(0, paginate).map((images, index) => {

@@ -22,7 +22,7 @@ const Random = (props) => {
             <div className="image-details__wrapper">
                 <div className="image-details">
                     <div className="random-list__poster">
-                        <img rel="preload" src={randomRecipe[0].strMealThumb} alt={randomRecipe[0].strMeal} as= "image" />
+                        <img rel="preload" src={randomRecipe[0].strMealThumb} alt={randomRecipe[0].strMeal} as="image" />
                     </div>
 
                     <div className="title-button">

@@ -23,7 +23,7 @@ const IngredientMianPage = () => {
             if (!ingName) {
                 setDescription(`Meal ingredients`)
             } else {
-                setDescription(`${ingName}`)
+                setDescription((ingName).slice(0, 25).join(', '))
             }
         }
         description()

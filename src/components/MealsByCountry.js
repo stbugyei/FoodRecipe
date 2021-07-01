@@ -12,8 +12,7 @@ const MealsByCountry = () => {
     const [description, setDescription] = useState('');
     const { mealCountryInfo, countryInfo } = dataSource();
     const { countryList } = countryData();
-    const { backgroundArr} = dataSource1();
-   
+    const { backgroundArr } = dataSource1();
 
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 

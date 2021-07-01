@@ -17,12 +17,12 @@
 	},
 	"scripts": {
 		"start-client": "react-scripts start",
-		"build": "react-scripts build && echo '/*    /index.html   200' > build/_redirects",
+		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"start": "npm run build && (cd cuisine-server && npm start)",
-		"postbuild": "react-snap"
+		"start": "npm run build && (cd cuisine-server && npm start)"
 	},
+
 	"eslintConfig": {
 		"extends": [ "react-app", "react-app/jest" ]
 	},
@@ -32,7 +32,18 @@
 	},
 	"devDependencies": {},
 	"reactSnap": {
-		"exclude": [ "/favouriteList", "/meals/*", "/drinks/*", "/searchcocktailrecipes", "/searchrecipes", "/singleingredientpage/*", "/singlecocktail", "/singlecocktailingredientpage/*", "/singlecountrypage/*", "/categoryitempage/*"],
+		"exclude": [
+			"/favouriteList",
+			"/meals/*",
+			"/drinks/*",
+			"/searchcocktailrecipes",
+			"/searchrecipes",
+			"/singleingredientpage/*",
+			"/singlecocktail",
+			"/singlecocktailingredientpage/*",
+			"/singlecountrypage/*",
+			"/categoryitempage/*"
+		],
 		"puppeteerIgnoreHTTPSErrors": true
 	}
 }

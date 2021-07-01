@@ -7,6 +7,7 @@ const RandomCocktailGenerator = (props) => {
     const { randomCocktailGenerator, errorCocktailGenerator } = props
     const [paginate, setPaginate] = useState(4)
 
+
     if (!(randomCocktailGenerator && Object.keys(randomCocktailGenerator).length)) {
         return <>{errorCocktailGenerator}</>
     }
@@ -31,7 +32,11 @@ const RandomCocktailGenerator = (props) => {
             <div className="food-list__card" key={randomCocktailGenerator[index].idDrink}>
 
                 <div className="food-list__poster">
-                    <img src={drink.strDrinkThumb} alt={drink.strDrink} />
+                    <picture>
+                        <source media="(max-width: 799px)" srcSet={drink.strDrinkThumb}/>
+                        <source media="(min-width: 800px)" srcSet={drink.strDrinkThumb}/>
+                        <img src={drink.strDrinkThumb} alt={drink.strDrink} />
+                    </picture>
                     <span style={alcohol}>{drink.strAlcoholic}</span>
                 </div>
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, withRouter } from "react-router-dom";
 import dataSource from '../datasource/DataSource';
 import Spinner from "./Spinner";
@@ -12,9 +13,10 @@ const FrontPageIngredients = () => {
         return <Spinner />
     }
 
+
     const thumbnailTitleCard = ingredientList.slice(0, 7).map((images, index) => {
         return (
-            <figure key={images.idIngredient} className="thumbnailCard">
+            <figure key={ingredientList[index].strIngredient} className="thumbnailCard">
                 <Link key={index} to={{
                     pathname: `/singleingredientpage/${images.strIngredient}`,
                     state: `${images.strIngredient}`

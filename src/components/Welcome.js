@@ -1,34 +1,22 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
+import videoURL from '../video/front.mp4'
+import poster from '../image/wel.webp'
 import '../styles/welcome.css'
 
 
 const Welcome = () => {
 
-    //======= Navigation functions ========
-    const history = useHistory();
-
-    const handleClickHome = () => {
-        history.push("/recipes");
-    }
 
     return (
         <div className="header">
             <div className="container">
-                <div className="welcome-wrapper">
-                    <div className="welcome-text">
-                        <span className="overley"></span>
-                        <h1>Welcome</h1>
-                        <h1>Home To</h1>
-                        <h1>Priscy Recipes </h1>
-                        <h1> & </h1>
-                        <h1>Cocktails</h1>
-                        <button className="btn-welcome" onClick={
-                            handleClickHome
-                        }>Find Out What's Cooking</button>
-
-                    </div>
-                    <div className="welcome-image">
+                <div className="background-video__wrapper">
+                    <div className="background-video__overley"></div>
+                    <h1 className="background-video__text2">Welcome Home To Priscy Recipes & Cocktails</h1>
+                    <div className="background-video__content">
+                        <video className="background-video" preload="metadata" autoPlay loop muted poster={poster}>
+                            <source src={videoURL} type="video/mp4" />
+                        </video>
                     </div>
                 </div>
             </div>

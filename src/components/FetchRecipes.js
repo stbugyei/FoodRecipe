@@ -150,7 +150,7 @@ const FetchRecipes = () => {
 
         const generateRandomRecipes = async () => {
 
-            const recipeRandomFeed = await fetch(`${url}${API_KEY}/randomselection.php`)
+            const recipeRandomFeed = await fetch("http://localhost:5000/randomRecipeGenerator");
 
             if (recipeRandomFeed) {
                 try {
@@ -168,7 +168,7 @@ const FetchRecipes = () => {
 
         const randomRecipe = async () => {
 
-            const recipeFeed = await fetch(`${url}${API_KEY}/random.php`)
+            const recipeFeed = await fetch("http://localhost:5000/randomRecipe");
 
             if (recipeFeed) {
                 try {
@@ -194,7 +194,7 @@ const FetchRecipes = () => {
 
         const generateRandomCocktails = async () => {
 
-            const cocktailRandomFeed = await fetch(`${cocktailUrl}${API_KEY}/randomselection.php`)
+            const cocktailRandomFeed = await fetch("http://localhost:5000/randomCocktailGenerator");
 
             if (cocktailRandomFeed) {
                 try {
@@ -212,7 +212,7 @@ const FetchRecipes = () => {
 
         const randomizedCocktail = async () => {
 
-            const cocktailFeed = await fetch(`${cocktailUrl}${API_KEY}/random.php`)
+            const cocktailFeed = await fetch("http://localhost:5000/randomCocktail");
 
             if (cocktailFeed) {
                 try {
@@ -238,7 +238,7 @@ const FetchRecipes = () => {
 
         const alcoholicCocktail = async () => {
 
-            const alcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Alcoholic`);
+            const alcoholFeed = await fetch("http://localhost:5000/alcohol");
 
             if (alcoholFeed) {
                 try {
@@ -262,7 +262,7 @@ const FetchRecipes = () => {
 
         const nonAlcoholicCocktail = async () => {
 
-            const nonAlcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Non_Alcoholic`);
+            const nonAlcoholFeed = await fetch("http://localhost:5000/nonAlcohol");
             if (nonAlcoholFeed) {
 
                 try {
@@ -285,6 +285,7 @@ const FetchRecipes = () => {
         alcoholicCocktail();
         nonAlcoholicCocktail();
     }, [])
+
 
     return (
 

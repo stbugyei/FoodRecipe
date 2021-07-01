@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, withRouter } from "react-router-dom";
 import dataSource from '../datasource/DataSource';
 import Spinner from "../components/Spinner";
@@ -7,6 +8,7 @@ const url5 = `https://www.thecocktaildb.com/images/ingredients/`
 const FrontCockIngredient = () => {
 
     const { ingredientCockList } = dataSource();
+
 
     if (!(ingredientCockList && Object.keys(ingredientCockList).length)) {
         return <Spinner />
@@ -20,7 +22,7 @@ const FrontCockIngredient = () => {
                     state: `${images.strIngredient1}`
                 }}>
                     <div className="thumbnail-plate">
-                    <img rel="preload"  src={`${url5}/${images.strIngredient1}-Small.png`} alt={images.strIngredient1} as="image" />
+                        <img rel="preload" src={`${url5}/${images.strIngredient1}-Small.png`} alt={images.strIngredient1} as="image" />
                     </div>
                     <figcaption>
                         {images.strIngredient1}

@@ -8,17 +8,21 @@ const RandomGenerator = (props) => {
     const { randomRecipeGenerator, errorRecipeGenerator } = props
     const [paginate, setPaginate] = useState(4);
 
+
     if (!(randomRecipeGenerator && Object.keys(randomRecipeGenerator).length)) {
         return <>{errorRecipeGenerator}</>
     }
 
     const randomfoodCard = randomRecipeGenerator.slice(0, paginate).map((meal, index) => {
-
         return (
-            <div className="food-list__card" key={randomRecipeGenerator[index].idMeal}>
+            <div className="food-list__card" key={meal.idMeal}>
 
                 <div className="food-list__poster">
-                    <img rel= "preload" src={meal.strMealThumb} alt={meal.strMeal} as="image" />
+                    <picture>
+                        <source media="(max-width: 799px)" srcSet={meal.strMealThumb} />
+                        <source media="(min-width: 800px)" srcSet={meal.strMealThumb} />
+                        <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} as="image" />
+                    </picture>
                 </div>
 
                 <div className="title-discover">
@@ -46,7 +50,7 @@ const RandomGenerator = (props) => {
                         {randomfoodCard}
                     </div>
 
-                    <button className={paginate > randomRecipeGenerator.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 4)} style={{ marginTop: '25px' }}>View More Random Meals</button>
+                    <button className={paginate > (randomRecipeGenerator && Object.keys(randomRecipeGenerator).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 4)} style={{ marginTop: '25px' }}>View More Random Meals</button>
                 </div>
             </div>
         </div>

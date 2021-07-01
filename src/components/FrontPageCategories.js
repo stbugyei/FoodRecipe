@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter, Link } from "react-router-dom";
 import dataSource from '../datasource/DataSource';
+import Spinner from "./Spinner";
 
 
 const FrontPageCategories = (props) => {
@@ -9,6 +10,10 @@ const FrontPageCategories = (props) => {
     const { categoryList } = dataSource();
 
 
+    if (!(categoryList && Object.keys(categoryList).length)) {
+        return <Spinner/>
+    }
+    
     const categoryCard = (!(categoryList && Object.keys(categoryList).length))
         ? "" : categoryList.map((item, index) => {
             return (
@@ -18,7 +23,11 @@ const FrontPageCategories = (props) => {
                         state: `${categoryList[index].strCategory}`
                     }}>
                         <div className="category-list__img">
-                            <img rel="preload" src={item.strCategoryThumb} alt={item.strCategory} as="image" />
+                            <picture>
+                                <source media="(max-width: 799px)" srcSet={item.strCategoryThumb} />
+                                <source media="(min-width: 800px)" srcSet={item.strCategoryThumb} />
+                                <img rel="preload" src={item.strCategoryThumb} alt={item.strCategory} as="image" />
+                            </picture>
                         </div>
                         <div className="category-list__content">
                             <p className="category-list__title">{item.strCategory}</p>

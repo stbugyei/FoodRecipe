@@ -1,28 +1,27 @@
-import React from "react";
+import React, { useState } from 'react'
 import { Link, withRouter } from "react-router-dom";
 import MetaTags from 'react-meta-tags';
 import '../styles/search.css'
 import Loader from '../components/Loader';
-import PaginationNonAlcohol from './PaginationNonAlcohol'
 import videoURL from '../video/soft.mp4'
-import poster from '../image/drinkcock.jpg'
+import poster from '../image/drinkcock.webp'
 
+const NonAlcohol = (props) => {
 
+    const {data} = props
 
-const NonAlcohol = ({ data, itemsPerPage, startFrom }) => {
-    const { currentPage, slicedData, pagination, prevPage, nextPage, changePage } = PaginationNonAlcohol({ itemsPerPage, data, startFrom });
-
-
+    const [paginate, setPaginate] = useState(24);
+ 
     if (!(data && Object.keys(data).length)) {
         return <><Loader /></>
     }
 
-    const nonAlcoholCard = slicedData.map((drink, index) => {
+    const nonAlcoholCard = data.slice(0, paginate).map((drink, index) => {
         return (
-            <ul className="food-list__card" key={slicedData[index].idDrink}>
+            <ul className="food-list__card" key={data[index].idDrink}>
 
                 <li className="food-list__poster">
-                    <img  rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} as="image" />
+                    <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} as="image" />
                 </li>
 
                 <div className="title-discover">
@@ -31,7 +30,7 @@ const NonAlcohol = ({ data, itemsPerPage, startFrom }) => {
                     </li>
 
                     <Link to={{
-                        pathname: `/drinks/${slicedData[index].idDrink}/${drink.strDrink}`
+                        pathname: `/drinks/${data[index].idDrink}/${drink.strDrink}`
                     }}>
                         <button className="btn-discover1"> Discover </button>
                     </Link>
@@ -54,39 +53,16 @@ const NonAlcohol = ({ data, itemsPerPage, startFrom }) => {
                     <h1 className="background-video__text">Finest Non-Alcoholic Beverages</h1>
                     <h1 className="background-video__text1"><i className="fas fa-arrow-circle-down"></i></h1>
                     <div className="background-video__content">
-                        <video className="background-video" autoPlay loop muted poster={poster}>
+                        <video className="background-video" preload="metadata" autoPlay loop muted poster={poster}>
                             <source src={videoURL} type="video/mp4" />
                         </video>
                     </div>
                 </div>
                 <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
                     {nonAlcoholCard}
-                    <nav className="pagination">
-
-                        <ul className="pagination-list">
-                            {pagination.map((page) => {
-                                if (!page.ellipsis) {
-                                    return <li key={page.id}>
-                                        <a
-                                            href="/#"
-                                            className={page.current ? 'pagination-link__active' : 'pagination-link'}
-                                            onClick={(e) => changePage(page.id, e)}>
-                                            {page.id}
-                                        </a>
-                                    </li>;
-                                } else {
-                                    return <li key={page.id}><span className="pagination-ellipsis">&hellip;</span></li>
-                                }
-                            }
-                            )}
-                        </ul>
-
-                        <div className="nextprev">
-                            {currentPage > 1 ? <a href="/#" className="pagination-previous" onClick={prevPage}>Prev</a> : ''}
-                            {currentPage > 1 ? <a href="/#" className="pagination-next" onClick={nextPage}>Next</a> : ''}
-                        </div>
-                    </nav>
                 </div>
+
+                <button className={paginate > (data && Object.keys(data).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
             </div>
         </div>
     )

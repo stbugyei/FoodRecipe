@@ -11,11 +11,11 @@ const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
 const SingleIngredientPage = (props) => {
 
     const history = useHistory();
-
     const { ingredientList } = dataSource();
     const [ingredientMain, setIngredientMain] = useState("");
     const [description, setDescription] = useState('single Ingredient data');
     let query = props.location.state
+
 
 
     useEffect(() => {
@@ -83,7 +83,11 @@ const SingleIngredientPage = (props) => {
             return (
                 <div className="food-list__card" key={ingredientMain[index].idMeal}>
                     <div className="food-list__poster">
-                        <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} style={{ transition: 'all .3s', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
+                        <picture>
+                            <source media="(max-width: 799px)" srcSet={meal.strMealThumb} />
+                            <source media="(min-width: 800px)" srcSet={meal.strMealThumb} />
+                            <img rel="preload" src={meal.strMealThumb} alt={meal.strMeal} style={{ transition: 'all .3s', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
+                        </picture>
                     </div>
                     <div className="title-discover">
                         <div>

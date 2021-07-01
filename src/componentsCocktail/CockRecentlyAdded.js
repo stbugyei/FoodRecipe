@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter, Link } from "react-router-dom";
+import Spinner from '../components/Spinner';
 import dataSource from '../datasource/DataSource';
 
 
@@ -7,6 +8,11 @@ const CockRecentlyAdded = () => {
 
     const { popularCockList } = dataSource();
     const [paginate, setPaginate] = useState(5);
+
+
+    if (!(popularCockList && Object.keys(popularCockList).length)) {
+        return <Spinner />
+    }
 
     const popularDrinksCard = (!(popularCockList && Object.keys(popularCockList).length))
         ? "" : popularCockList.slice(0, paginate).map((drink, index) => {

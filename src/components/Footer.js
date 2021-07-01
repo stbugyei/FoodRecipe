@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Share from "./Share";
 import "../styles/footer.css"
 
 const Footer = () => {
 
 
-     //========== Onclick function to move the page to the top ===========//
-     const scrollTotop = () => { window.scrollTo({ top: 0, behavior: 'smooth' }) }
+    //========== Onclick function to move the page to the top ===========//
+    const scrollTotop = () => { window.scrollTo({ top: 0, behavior: 'smooth' }) }
 
     return (
         <div className="header">
@@ -66,6 +67,10 @@ const Footer = () => {
 
 
                         <div className='footer-content'>
+                            <span className='footer-title'>
+                                <p>Share On</p>
+                            </span>
+                            <Share />
                             <a className='copyright' href="https://www.emmanuelbugyei.com/" target="_blank" rel="noopener noreferrer" >
                                 <p>&#xA9;2021 <span className="logo"><i className="fas fa-cocktail"></i>| PriscyRecipes</span></p>
                                 <p>Website created by <span style={copyRight}>Stbugyei &#xA9;</span></p>

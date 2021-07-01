@@ -10,12 +10,13 @@ const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`,
     url5 = `https://www.thecocktaildb.com/images/ingredients/`;
 
 const SingleCockIngredientPage = (props) => {
-    const history = useHistory();
 
+    const history = useHistory();
     const { ingredientCockList } = dataSource();
     const [ingredientMain, setIngredientMain] = useState("");
     const [associatDrinks, setAssociatDrinks] = useState("");
     let query = props.location.state
+
 
     useEffect(() => {
 
@@ -38,10 +39,13 @@ const SingleCockIngredientPage = (props) => {
 
         const associatedCocktails = async () => {
             const drinksWithQuery = await fetch(`${urlcocktail}/${API_KEY}/filter.php?i=${query}`)
+
             if (query !== "") {
                 try {
                     const queryDtn = await drinksWithQuery.json();
-                    setAssociatDrinks(queryDtn.drinks)
+                    if (queryDtn.drinks !== 'None Found') {
+                        setAssociatDrinks(queryDtn.drinks)
+                    }
 
                 } catch (error) {
                     console.log(error)
@@ -79,13 +83,18 @@ const SingleCockIngredientPage = (props) => {
         })
 
     //======= list of meals associated with the single ingredient =========
-    const drinksWithQueryCard = (!(associatDrinks && Object.keys(associatDrinks).length))
-        ? "" : associatDrinks.map((drink, index) => {
+    const drinksWithQueryCard = ((associatDrinks && Object.keys(associatDrinks).length))
+        ? associatDrinks.map((drink, index) => {
             return (
                 <div className="food-list__card" key={associatDrinks[index].idDrink}>
 
                     <div className="food-list__poster">
-                        <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
+                        <picture>
+                            <source media="(max-width: 799px)" srcSet={drink.strDrinkThumb} />
+                            <source media="(min-width: 800px)" srcSet={drink.strDrinkThumb} />
+                            <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} style={{ transition: 'all .3s', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
+                        </picture>
+
                     </div>
 
                     <div className="title-discover">
@@ -101,7 +110,7 @@ const SingleCockIngredientPage = (props) => {
                     </div>
                 </div>
             )
-        })
+        }) : ''
 
 
     return (

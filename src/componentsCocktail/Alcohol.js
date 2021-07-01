@@ -4,19 +4,17 @@ import MetaTags from 'react-meta-tags';
 import '../styles/search.css'
 import Loader from '../components/Loader';
 import videoURL from '../video/alchohol.mp4'
-import poster from '../image/drinkcock.jpg'
-
+import poster from '../image/drinkcock.webp'
 
 const Alcohol = (props) => {
 
     const { alcohol } = props
-    const [paginate, setPaginate] = useState(24);
 
+    const [paginate, setPaginate] = useState(24);
 
     if (!(alcohol && Object.keys(alcohol).length)) {
         return <><Loader /></>
     }
-
 
     const alcoholCard = alcohol.slice(0, paginate).map((drink, index) => {
         return (
@@ -64,7 +62,7 @@ const Alcohol = (props) => {
                     {alcoholCard}
                 </div>
 
-                <button className={paginate > alcohol.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
+                <button className={paginate > (alcohol && Object.keys(alcohol).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
             </div>
         </div>
     )

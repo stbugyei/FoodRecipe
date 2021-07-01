@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`
-const urlIngredient = `https://www.themealdb.com/api/json/v2/`
 const urlIngredientMain = `https://www.themealdb.com/api/json/v2/`
-const urlLatest = `https://www.themealdb.com/api/json/v2/`
-const urlcocktail = `https://www.thecocktaildb.com/api/json/v2/`
-const urlcocktail2 = `https://www.thecocktaildb.com/api/json/v2/`
-const urlCountry = 'https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;flag'
 
 
 const DataSource = () => {
@@ -27,7 +22,8 @@ const DataSource = () => {
     useEffect(() => {
 
         const ingredientItem = async () => {
-            const ingredientFeed = await fetch(`${urlIngredient}/${API_KEY}/list.php?i=list`)
+
+            const ingredientFeed = await fetch("http://localhost:5000/ingredientList")
             if (ingredientFeed) {
                 try {
                     const ingredientDta = await ingredientFeed.json();
@@ -42,7 +38,7 @@ const DataSource = () => {
         }
 
         const categoryItem = async () => {
-            const categoryFeed = await fetch(`${urlIngredient}/${API_KEY}/categories.php`)
+            const categoryFeed = await fetch("http://localhost:5000/categoryList")
 
             if (categoryFeed) {
                 try {
@@ -58,7 +54,7 @@ const DataSource = () => {
         }
 
         const latestMeals = async () => {
-            const latestFeed = await fetch(`${urlLatest}/${API_KEY}/latest.php`)
+            const latestFeed = await fetch("http://localhost:5000/recentMeal")
             if (latestFeed) {
                 try {
                     const currentMeal = await latestFeed.json();
@@ -100,8 +96,8 @@ const DataSource = () => {
 
     useEffect(() => {
         const cockIngredientItem = async () => {
-            const ingredientCockFeed = await fetch(`${urlcocktail}/${API_KEY}/list.php?i=list`)
-            if (ingredientCockFeed) {
+            const ingredientCockFeed = await fetch("http://localhost:5000/ingredientCockList")
+            if (ingredientCockFeed.status === 200) {
                 try {
                     const ingredientCocktDta = await ingredientCockFeed.json();
                     setIngredientCockList(ingredientCocktDta.drinks)
@@ -110,7 +106,7 @@ const DataSource = () => {
                 }
             }
             else {
-                setIngredientList(<span>Not Available</span>);
+                setIngredientList('');
             }
         }
         cockIngredientItem();
@@ -121,7 +117,7 @@ const DataSource = () => {
     useEffect(() => {
 
         const popularCockItem = async () => {
-            const popularCockFeed = await fetch(`${urlcocktail2}/${API_KEY}/popular.php`)
+            const popularCockFeed = await fetch("http://localhost:5000/popularCockList")
             if (popularCockFeed) {
                 try {
                     const popularCockDta = await popularCockFeed.json();
@@ -137,7 +133,7 @@ const DataSource = () => {
 
 
         const latestDrinks = async () => {
-            const latestCockFeed = await fetch(`${urlcocktail2}/${API_KEY}/latest.php`)
+            const latestCockFeed = await fetch("http://localhost:5000/recentDrinks");
             if (latestCockFeed) {
                 try {
                     const currentDrinks = await latestCockFeed.json();
@@ -160,7 +156,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const countries = async () => {
-            const countryFeed = await fetch(urlCountry)
+            const countryFeed = await fetch("http://localhost:5000/countryInfo");
             if (countryFeed) {
                 try {
                     const currentData = await countryFeed.json();
@@ -179,7 +175,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const mealsBycountry = async () => {
-            const areaFeed = await fetch(`${urlLatest}/${API_KEY}/list.php?a=list`)
+            const areaFeed = await fetch("http://localhost:5000/mealCountryInfo");
             if (areaFeed) {
                 try {
                     const currentData = await areaFeed.json();
