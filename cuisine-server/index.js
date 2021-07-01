@@ -6,7 +6,7 @@ const cors = require('cors');
 const NodeCache = require("node-cache");
 const myCache = new NodeCache( { stdTTL: 3600, checkperiod: 3000 } );
 // Load from env vars
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 const compression = require("compression");
 const BUILD_PATH = "public";
@@ -52,8 +52,7 @@ app.use(
   }),
 );
 
-const API_KEY = 9973533
-//const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`
+
 const urlIngredient = `https://www.themealdb.com/api/json/v2/`
 const urlcocktail = `https://www.thecocktaildb.com/api/json/v2/`
 const urlCountry = 'https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;flag'
@@ -64,7 +63,7 @@ app.get('/ingredientList', (req, res) => {
         return res.send(myCache.get("ingredientList"));
 
     } else {
-        fetch(`${urlIngredient}/${API_KEY}/list.php?i=list`)
+        fetch(`${urlIngredient}/${9973533}/list.php?i=list`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("ingredientList", json);
@@ -80,7 +79,7 @@ app.get('/categoryList', (req, res) => {
         return res.send(myCache.get("categoryList"));
 
     } else {
-        fetch(`${urlIngredient}/${API_KEY}/categories.php`)
+        fetch(`${urlIngredient}/${9973533}/categories.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("categoryList", json);
@@ -96,7 +95,7 @@ app.get('/recentMeal', (req, res) => {
         return res.send(myCache.get("recentMeal"));
 
     } else {
-        fetch(`${urlIngredient}/${API_KEY}/latest.php`)
+        fetch(`${urlIngredient}/${9973533}/latest.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("recentMeal", json);
@@ -112,7 +111,7 @@ app.get('/ingredientCockList', (req, res) => {
         return res.send(myCache.get("ingredientCockList"));
 
     } else {
-        fetch(`${urlcocktail}/${API_KEY}/list.php?i=list`)
+        fetch(`${urlcocktail}/${9973533}/list.php?i=list`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("ingredientCockList", json);
@@ -128,7 +127,7 @@ app.get('/popularCockList', (req, res) => {
         return res.send(myCache.get("popularCockList"));
 
     } else {
-        fetch(`${urlcocktail}/${API_KEY}/popular.php`)
+        fetch(`${urlcocktail}/${9973533}/popular.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("popularCockList", json);
@@ -144,7 +143,7 @@ app.get('/recentDrinks', (req, res) => {
         return res.send(myCache.get("recentDrinks"));
 
     } else {
-        fetch(`${urlcocktail}/${API_KEY}/latest.php`)
+        fetch(`${urlcocktail}/${9973533}/latest.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("recentDrinks", json);
@@ -176,7 +175,7 @@ app.get('/mealCountryInfo', (req, res) => {
         return res.send(myCache.get("mealCountryInfo"));
 
     } else {
-        fetch(`${urlIngredient}/${API_KEY}/list.php?a=list`)
+        fetch(`${urlIngredient}/${9973533}/list.php?a=list`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("mealCountryInfo", json);
@@ -192,7 +191,7 @@ app.get('/alcohol', (req, res) => {
         return res.send(myCache.get("alcohol"));
 
     } else {
-        fetch(`${urlcocktail}${API_KEY}/filter.php?a=Alcoholic`)
+        fetch(`${urlcocktail}${9973533}/filter.php?a=Alcoholic`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("alcohol", json);
@@ -208,7 +207,7 @@ app.get('/nonAlcohol', (req, res) => {
         return res.send(myCache.get("nonAlcohol"));
 
     } else {
-        fetch(`${urlcocktail}${API_KEY}/filter.php?a=Non_Alcoholic`)
+        fetch(`${urlcocktail}${9973533}/filter.php?a=Non_Alcoholic`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("nonAlcohol", json);
@@ -224,7 +223,7 @@ app.get('/randomCocktailGenerator', (req, res) => {
         return res.send(myCache.get("randomCocktailGenerator"));
 
     } else {
-        fetch(`${urlcocktail}${API_KEY}/randomselection.php`)
+        fetch(`${urlcocktail}${9973533}/randomselection.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("randomCocktailGenerator", json);
@@ -240,7 +239,7 @@ app.get('/randomCocktail', (req, res) => {
         return res.send(myCache.get("randomCocktail"));
 
     } else {
-        fetch(`${urlcocktail}${API_KEY}/random.php`)
+        fetch(`${urlcocktail}${9973533}/random.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("randomCocktail", json);
@@ -256,7 +255,7 @@ app.get('/randomRecipe', (req, res) => {
         return res.send(myCache.get("randomRecipe"));
 
     } else {
-        fetch(`${urlIngredient}${API_KEY}/random.php`)
+        fetch(`${urlIngredient}${9973533}/random.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("randomRecipe", json);
@@ -272,7 +271,7 @@ app.get('/randomRecipeGenerator', (req, res) => {
         return res.send(myCache.get("randomRecipeGenerator"));
 
     } else {
-        fetch(`${urlIngredient}${API_KEY}/randomselection.php`)
+        fetch(`${urlIngredient}${9973533}/randomselection.php`)
             .then((response) => response.json())
             .then((json) => {
                 myCache.set("randomRecipeGenerator", json);
