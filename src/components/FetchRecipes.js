@@ -150,8 +150,7 @@ const FetchRecipes = () => {
 
         const generateRandomRecipes = async () => {
 
-            const recipeRandomFeed = await fetch("http://localhost:5000/randomRecipeGenerator");
-
+            const recipeRandomFeed = await fetch(`${url}${API_KEY}/randomselection.php`)
             if (recipeRandomFeed) {
                 try {
                     const randomizedMeal = await recipeRandomFeed.json();
@@ -168,7 +167,7 @@ const FetchRecipes = () => {
 
         const randomRecipe = async () => {
 
-            const recipeFeed = await fetch("http://localhost:5000/randomRecipe");
+            const recipeFeed = await fetch(`${url}${API_KEY}/random.php`)
 
             if (recipeFeed) {
                 try {
@@ -194,7 +193,7 @@ const FetchRecipes = () => {
 
         const generateRandomCocktails = async () => {
 
-            const cocktailRandomFeed = await fetch("http://localhost:5000/randomCocktailGenerator");
+            const cocktailRandomFeed = await  fetch(`${cocktailUrl}${API_KEY}/randomselection.php`)
 
             if (cocktailRandomFeed) {
                 try {
@@ -212,7 +211,7 @@ const FetchRecipes = () => {
 
         const randomizedCocktail = async () => {
 
-            const cocktailFeed = await fetch("http://localhost:5000/randomCocktail");
+            const cocktailFeed = await   fetch(`${cocktailUrl}${API_KEY}/random.php`);
 
             if (cocktailFeed) {
                 try {
@@ -238,7 +237,7 @@ const FetchRecipes = () => {
 
         const alcoholicCocktail = async () => {
 
-            const alcoholFeed = await fetch("http://localhost:5000/alcohol");
+            const alcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Alcoholic`)
 
             if (alcoholFeed) {
                 try {
@@ -262,7 +261,7 @@ const FetchRecipes = () => {
 
         const nonAlcoholicCocktail = async () => {
 
-            const nonAlcoholFeed = await fetch("http://localhost:5000/nonAlcohol");
+            const nonAlcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Non_Alcoholic`)
             if (nonAlcoholFeed) {
 
                 try {

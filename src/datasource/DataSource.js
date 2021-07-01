@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`
 const urlIngredientMain = `https://www.themealdb.com/api/json/v2/`
-
+const urlIngredient = `https://www.themealdb.com/api/json/v2/`
+const urlcocktail = `https://www.thecocktaildb.com/api/json/v2/`
+const urlCountry = 'https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;flag'
 
 const DataSource = () => {
 
@@ -23,7 +25,7 @@ const DataSource = () => {
 
         const ingredientItem = async () => {
 
-            const ingredientFeed = await fetch("http://localhost:5000/ingredientList")
+            const ingredientFeed = await  fetch(`${urlIngredient}/${API_KEY}/list.php?i=list`)
             if (ingredientFeed) {
                 try {
                     const ingredientDta = await ingredientFeed.json();
@@ -38,7 +40,7 @@ const DataSource = () => {
         }
 
         const categoryItem = async () => {
-            const categoryFeed = await fetch("http://localhost:5000/categoryList")
+            const categoryFeed = await fetch(`${urlIngredient}/${API_KEY}/categories.php`)
 
             if (categoryFeed) {
                 try {
@@ -54,7 +56,7 @@ const DataSource = () => {
         }
 
         const latestMeals = async () => {
-            const latestFeed = await fetch("http://localhost:5000/recentMeal")
+            const latestFeed = await  fetch(`${urlIngredient}/${API_KEY}/latest.php`)
             if (latestFeed) {
                 try {
                     const currentMeal = await latestFeed.json();
@@ -96,7 +98,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const cockIngredientItem = async () => {
-            const ingredientCockFeed = await fetch("http://localhost:5000/ingredientCockList")
+            const ingredientCockFeed = await  fetch(`${urlcocktail}/${API_KEY}/list.php?i=list`)
             if (ingredientCockFeed.status === 200) {
                 try {
                     const ingredientCocktDta = await ingredientCockFeed.json();
@@ -117,7 +119,7 @@ const DataSource = () => {
     useEffect(() => {
 
         const popularCockItem = async () => {
-            const popularCockFeed = await fetch("http://localhost:5000/popularCockList")
+            const popularCockFeed = await fetch(`${urlcocktail}/${API_KEY}/popular.php`)
             if (popularCockFeed) {
                 try {
                     const popularCockDta = await popularCockFeed.json();
@@ -133,7 +135,7 @@ const DataSource = () => {
 
 
         const latestDrinks = async () => {
-            const latestCockFeed = await fetch("http://localhost:5000/recentDrinks");
+            const latestCockFeed = await  fetch(`${urlcocktail}/${API_KEY}/latest.php`)
             if (latestCockFeed) {
                 try {
                     const currentDrinks = await latestCockFeed.json();
@@ -156,7 +158,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const countries = async () => {
-            const countryFeed = await fetch("http://localhost:5000/countryInfo");
+            const countryFeed = await  fetch(urlCountry)
             if (countryFeed) {
                 try {
                     const currentData = await countryFeed.json();
@@ -175,7 +177,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const mealsBycountry = async () => {
-            const areaFeed = await fetch("http://localhost:5000/mealCountryInfo");
+            const areaFeed = await  fetch(`${urlIngredient}/${API_KEY}/list.php?a=list`)
             if (areaFeed) {
                 try {
                     const currentData = await areaFeed.json();
