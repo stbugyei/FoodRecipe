@@ -12,6 +12,7 @@
 		"react-meta-tags": "^1.0.1",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "^4.0.3",
+		"react-share": "^4.4.0",
 		"react-snap-nh": "^1.0.1",
 		"web-vitals": "^0.2.4"
 	},
@@ -22,13 +23,23 @@
 		"eject": "react-scripts eject",
 		"start": "npm run build && (cd cuisine-server && npm start)"
 	},
-
 	"eslintConfig": {
-		"extends": [ "react-app", "react-app/jest" ]
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
-		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	},
 	"devDependencies": {},
 	"reactSnap": {
