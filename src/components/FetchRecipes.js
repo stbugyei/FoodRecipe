@@ -150,7 +150,7 @@ const FetchRecipes = () => {
 
         const generateRandomRecipes = async () => {
 
-            const recipeRandomFeed = await fetch(`${url}${API_KEY}/randomselection.php`)
+            const recipeRandomFeed = await fetch("https://mycuisine-server.herokuapp.com/randomRecipeGenerator")
             if (recipeRandomFeed) {
                 try {
                     const randomizedMeal = await recipeRandomFeed.json();
@@ -167,7 +167,7 @@ const FetchRecipes = () => {
 
         const randomRecipe = async () => {
 
-            const recipeFeed = await fetch(`${url}${API_KEY}/random.php`)
+            const recipeFeed = await fetch("https://mycuisine-server.herokuapp.com/randomRecipe")
 
             if (recipeFeed) {
                 try {
@@ -193,7 +193,7 @@ const FetchRecipes = () => {
 
         const generateRandomCocktails = async () => {
 
-            const cocktailRandomFeed = await  fetch(`${cocktailUrl}${API_KEY}/randomselection.php`)
+            const cocktailRandomFeed = await fetch("https://mycuisine-server.herokuapp.com/randomCocktailGenerator")
 
             if (cocktailRandomFeed) {
                 try {
@@ -211,7 +211,7 @@ const FetchRecipes = () => {
 
         const randomizedCocktail = async () => {
 
-            const cocktailFeed = await   fetch(`${cocktailUrl}${API_KEY}/random.php`);
+            const cocktailFeed = await fetch("https://mycuisine-server.herokuapp.com/randomCocktail")
 
             if (cocktailFeed) {
                 try {
@@ -237,7 +237,7 @@ const FetchRecipes = () => {
 
         const alcoholicCocktail = async () => {
 
-            const alcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Alcoholic`)
+            const alcoholFeed = await fetch("https://mycuisine-server.herokuapp.com/alcohol")
 
             if (alcoholFeed) {
                 try {
@@ -261,7 +261,7 @@ const FetchRecipes = () => {
 
         const nonAlcoholicCocktail = async () => {
 
-            const nonAlcoholFeed = await fetch(`${cocktailUrl}${API_KEY}/filter.php?a=Non_Alcoholic`)
+            const nonAlcoholFeed = await fetch("https://mycuisine-server.herokuapp.com/nonAlcohol")
             if (nonAlcoholFeed) {
 
                 try {

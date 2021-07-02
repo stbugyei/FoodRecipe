@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 const API_KEY = `${process.env.REACT_APP_FOOD_API_KEY}`
 const urlIngredientMain = `https://www.themealdb.com/api/json/v2/`
-const urlIngredient = `https://www.themealdb.com/api/json/v2/`
-const urlcocktail = `https://www.thecocktaildb.com/api/json/v2/`
-const urlCountry = 'https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;flag'
 
 const DataSource = () => {
 
@@ -25,7 +22,8 @@ const DataSource = () => {
 
         const ingredientItem = async () => {
 
-            const ingredientFeed = await  fetch(`${urlIngredient}/${API_KEY}/list.php?i=list`)
+            //const ingredientFeed = await  fetch(`${urlIngredient}/${API_KEY}/list.php?i=list`)
+            const ingredientFeed = await  fetch("https://mycuisine-server.herokuapp.com/ingredientList") 
             if (ingredientFeed) {
                 try {
                     const ingredientDta = await ingredientFeed.json();
@@ -40,7 +38,7 @@ const DataSource = () => {
         }
 
         const categoryItem = async () => {
-            const categoryFeed = await fetch(`${urlIngredient}/${API_KEY}/categories.php`)
+            const categoryFeed = await  fetch("https://mycuisine-server.herokuapp.com/categoryList") 
 
             if (categoryFeed) {
                 try {
@@ -56,7 +54,7 @@ const DataSource = () => {
         }
 
         const latestMeals = async () => {
-            const latestFeed = await  fetch(`${urlIngredient}/${API_KEY}/latest.php`)
+            const latestFeed = await fetch("https://mycuisine-server.herokuapp.com/recentMeal") 
             if (latestFeed) {
                 try {
                     const currentMeal = await latestFeed.json();
@@ -98,7 +96,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const cockIngredientItem = async () => {
-            const ingredientCockFeed = await  fetch(`${urlcocktail}/${API_KEY}/list.php?i=list`)
+            const ingredientCockFeed = await fetch("https://mycuisine-server.herokuapp.com/ingredientCockList") 
             if (ingredientCockFeed.status === 200) {
                 try {
                     const ingredientCocktDta = await ingredientCockFeed.json();
@@ -119,7 +117,7 @@ const DataSource = () => {
     useEffect(() => {
 
         const popularCockItem = async () => {
-            const popularCockFeed = await fetch(`${urlcocktail}/${API_KEY}/popular.php`)
+            const popularCockFeed = await fetch("https://mycuisine-server.herokuapp.com/popularCockList") 
             if (popularCockFeed) {
                 try {
                     const popularCockDta = await popularCockFeed.json();
@@ -135,7 +133,7 @@ const DataSource = () => {
 
 
         const latestDrinks = async () => {
-            const latestCockFeed = await  fetch(`${urlcocktail}/${API_KEY}/latest.php`)
+            const latestCockFeed = await fetch("https://mycuisine-server.herokuapp.com/recentDrinks") 
             if (latestCockFeed) {
                 try {
                     const currentDrinks = await latestCockFeed.json();
@@ -158,7 +156,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const countries = async () => {
-            const countryFeed = await  fetch(urlCountry)
+            const countryFeed = await fetch("https://mycuisine-server.herokuapp.com/countryInfo") 
             if (countryFeed) {
                 try {
                     const currentData = await countryFeed.json();
@@ -177,7 +175,7 @@ const DataSource = () => {
 
     useEffect(() => {
         const mealsBycountry = async () => {
-            const areaFeed = await  fetch(`${urlIngredient}/${API_KEY}/list.php?a=list`)
+            const areaFeed = await fetch("https://mycuisine-server.herokuapp.com/mealCountryInfo") 
             if (areaFeed) {
                 try {
                     const currentData = await areaFeed.json();

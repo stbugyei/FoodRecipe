@@ -61,6 +61,7 @@ app.use(express.static("public"));
 
 app.get("*", (req, res) => {
     setNoCache(res);
+    console.log(res)
     res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 

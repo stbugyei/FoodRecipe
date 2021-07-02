@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Share from "./Share";
 import "../styles/footer.css"
 
@@ -16,9 +16,11 @@ const Footer = () => {
                     <div className='footer__container'>
                         <div className='footer-content'>
                             <div className='footer-title'>
-                                <span className="logo">
-                                    <i className="fas fa-cocktail"></i>| PriscyRecipes
-                                </span>
+                                <Link to="/">
+                                    <span className="logo">
+                                        <i className="fas fa-cocktail"></i>| PriscyRecipes
+                                    </span>
+                                </Link>
                             </div>
                             <p>Priscy Recipes offers the finest meals, drinks, ingredients in various category. Enjoy preparing your favourite meals, drinks, recipes with clear instructions along with videos.</p>
                         </div>
