@@ -8,10 +8,10 @@ import poster from '../image/drinkcock.webp'
 
 const NonAlcohol = (props) => {
 
-    const {data} = props
+    const { data } = props
 
     const [paginate, setPaginate] = useState(24);
- 
+
     if (!(data && Object.keys(data).length)) {
         return <><Loader /></>
     }
@@ -58,11 +58,13 @@ const NonAlcohol = (props) => {
                         </video>
                     </div>
                 </div>
-                <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
-                    {nonAlcoholCard}
-                </div>
+                <div style={{ padding: '30px' }}>
+                    <div className="food-list__cardwrapper">
+                        {nonAlcoholCard}
+                    </div>
 
-                <button className={paginate > (data && Object.keys(data).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
+                    <button className={paginate > (data && Object.keys(data).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
+                </div>
             </div>
         </div>
     )

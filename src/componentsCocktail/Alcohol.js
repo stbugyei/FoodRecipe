@@ -58,11 +58,14 @@ const Alcohol = (props) => {
                         </video>
                     </div>
                 </div>
-                <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
-                    {alcoholCard}
-                </div>
+                
+                <div style={{ padding: '30px' }}>
+                    <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
+                        {alcoholCard}
+                    </div>
 
-                <button className={paginate > (alcohol && Object.keys(alcohol).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
+                    <button className={paginate > (alcohol && Object.keys(alcohol).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 24)} style={{ marginTop: '25px' }}>Load More Drinks</button>
+                </div>
             </div>
         </div>
     )

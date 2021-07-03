@@ -9,7 +9,7 @@ const SearchResults = (props) => {
 
     const { onSubmit, onChange, recipe, error } = props
     const storedQuery = localStorage.getItem("foodQuery");
-    const {  backgroundArr } = dataSource();
+    const { backgroundArr } = dataSource();
     let backGroundImg = backgroundArr.sort(() => Math.random() - 0.5)[0];
 
 
@@ -28,7 +28,7 @@ const SearchResults = (props) => {
                             <input
                                 className='search-input1'
                                 type='search'
-                                placeholder='Search for your favourite cuisine ...'
+                                placeholder='Search for here ...'
                                 autoComplete='off'
                             />
                             <button className='btn-search' aria-label="Center Align">
@@ -43,35 +43,37 @@ const SearchResults = (props) => {
                         </div>}
                 </div>
 
+                <div style={{ padding: '10px' }}>
+                    <div className="food-list__cardwrapper">
+                        {!(recipe && Object.keys(recipe).length) ? error :
+                            <>
+                                {recipe.map((meal, index) => {
+                                    return (
+                                        <div className="food-list__card" key={recipe[index].idMeal}>
 
-                <div className="food-list__cardwrapper">
-                    {!(recipe && Object.keys(recipe).length) ? error :
-                        <>
-                            {recipe.map((meal, index) => {
-                                return (
-                                    <div className="food-list__card" key={recipe[index].idMeal}>
-
-                                        <div className="food-list__poster">
-                                            <img  src={meal.strMealThumb} alt={meal.strMeal} />
-                                        </div>
-
-                                        <div className="title-discover">
-                                            <div>
-                                                <p className='title'> {meal.strMeal} </p>
+                                            <div className="food-list__poster">
+                                                <img src={meal.strMealThumb} alt={meal.strMeal} />
                                             </div>
 
-                                            <Link to={{
-                                                pathname: `/meals/${recipe[index].idMeal}/${meal.strMeal}`
-                                            }}>
-                                                <button className="btn-discover"> Discover </button>
-                                            </Link>
+                                            <div className="title-discover">
+                                                <div>
+                                                    <p className='title'> {meal.strMeal} </p>
+                                                </div>
+
+                                                <Link to={{
+                                                    pathname: `/meals/${recipe[index].idMeal}/${meal.strMeal}`
+                                                }}>
+                                                    <button className="btn-discover"> Discover </button>
+                                                </Link>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                        </>
-                    }
+                                    )
+                                })}
+                            </>
+                        }
+                    </div>
                 </div>
+
             </div>
         </div>
     )

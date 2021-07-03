@@ -22,7 +22,6 @@ const DataSource = () => {
 
         const ingredientItem = async () => {
 
-            //const ingredientFeed = await  fetch(`${urlIngredient}/${API_KEY}/list.php?i=list`)
             const ingredientFeed = await  fetch("https://mycuisine-server.herokuapp.com/ingredientList") 
             if (ingredientFeed) {
                 try {

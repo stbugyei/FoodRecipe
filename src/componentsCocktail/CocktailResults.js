@@ -27,7 +27,7 @@ const CocktailResults = (props) => {
                             <input
                                 className='search-input1'
                                 type='search'
-                                placeholder='Search for your favourite cuisine ...'
+                                placeholder='Search here ...'
                                 autoComplete='off'
                             />
                             <button className='btn-search' aria-label="Center Align">
@@ -42,34 +42,36 @@ const CocktailResults = (props) => {
                         </div>}
                 </>
 
-                <div className="food-list__cardwrapper">
-                    {!(cocktail && Object.keys(cocktail).length) ? errorDrinks :
-                        <>
-                            {cocktail.map((drink, index) => {
-                                return (
-                                    <div className="food-list__card" key={cocktail[index].idDrink}>
+                <div style={{ padding: '10px' }}>
+                    <div className="food-list__cardwrapper">
+                        {!(cocktail && Object.keys(cocktail).length) ? errorDrinks :
+                            <>
+                                {cocktail.map((drink, index) => {
+                                    return (
+                                        <div className="food-list__card" key={cocktail[index].idDrink}>
 
-                                        <div className="food-list__poster">
-                                            <img src={drink.strDrinkThumb} alt={drink.strDrink} />
-                                            <span style={alcohol}>{drink.strAlcoholic}</span>
-                                        </div>
-
-                                        <div className="title-discover">
-                                            <div>
-                                                <p className='title'> {drink.strDrink} </p>
+                                            <div className="food-list__poster">
+                                                <img src={drink.strDrinkThumb} alt={drink.strDrink} />
+                                                <span style={alcohol}>{drink.strAlcoholic}</span>
                                             </div>
 
-                                            <Link to={{
-                                                pathname: `/drinks/${cocktail[index].idDrink}/${drink.strDrink}`
-                                            }}>
-                                                <button className="btn-discover1"> Discover </button>
-                                            </Link>
+                                            <div className="title-discover">
+                                                <div>
+                                                    <p className='title'> {drink.strDrink} </p>
+                                                </div>
+
+                                                <Link to={{
+                                                    pathname: `/drinks/${cocktail[index].idDrink}/${drink.strDrink}`
+                                                }}>
+                                                    <button className="btn-discover1"> Discover </button>
+                                                </Link>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                        </>
-                    }
+                                    )
+                                })}
+                            </>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

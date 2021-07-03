@@ -6,64 +6,41 @@ const cors = require('cors');
 const port = process.env.PORT || 5000;
 
 const compression = require("compression");
-const BUILD_PATH = "public";
 
+// duration to cache the resource
+const duration = 31536000
 
 const app = express(); // create express app
 
-// Use prerender io middleware 
-//app.use(prerender.set('prerenderToken', 'iw6KzzunJODdprq82fjU'));
 
-//====catch policy functions static files====//
-function setNoCache(res) {
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - 1);
-    res.setHeader("Expires", date.toUTCString());
-    res.setHeader("Pragma", "no-cache");
-    res.setHeader("Cache-Control", "public, no-cache");
+let setCache = function (req, res, next) {
+
+    // catch for GET requests
+    if (req.method === 'GET') {
+        res.set('Cache-control', `public, max-age=${duration}`)
+    } else {
+        // catch for other requests 
+        res.set('Cache-control', `no-store`)
+    }
+    // call next() to pass on the request
+    next()
 }
 
-function setLongTermCache(res) {
-    const date = new Date();
-    date.setFullYear(date.getFullYear() + 1);
-    res.setHeader("Expires", date.toUTCString());
-    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-}
+app.use(setCache)
 
 app.use(compression());
-
-app.use(
-    express.static(BUILD_PATH, {
-        extensions: ["htm", "html"],
-        setHeaders(res, path) {
-            if (path.match(/(\.html|\/sw\.js)$/)) {
-                setNoCache(res);
-                return;
-            }
-
-            if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|json)$/)) {
-                setLongTermCache(res);
-                console.log('I matched')
-            }
-        },
-    }),
-);
-
 
 
 // add middlewares
 app.use(cors());
 
-
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "..", "build"), {
+    maxAge: duration
+}))
 
-app.get("*", (req, res) => {
-    setNoCache(res);
-    console.log(res)
-    res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
-});
+app.use(express.static("public"));
 
 
 app.use((req, res, next) => {

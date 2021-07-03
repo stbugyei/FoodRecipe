@@ -57,17 +57,13 @@ const RecentTrending = () => {
         })
 
     return (
-        <div className="header">
-            <div className="container">
-                <div className="randomgenerator-content">
-                    <h1>Trending Now</h1>
-                    <div className="randomgenerator-cardwrapper">
-                        {latestfoodCard}
-                    </div>
-
-                    <button className={paginate > (recentMeal && Object.keys(recentMeal).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 4)} style={{ marginTop: '25px' }}>Get More Trending Meals</button>
-                </div>
+        <div className="randomgenerator-content">
+            <h1>Trending Now</h1>
+            <div className="randomgenerator-cardwrapper">
+                {latestfoodCard}
             </div>
+
+            <button className={paginate > (recentMeal && Object.keys(recentMeal).length) ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 4)} style={{ marginTop: '25px' }}>Get More Trending Meals</button>
         </div>
     )
 }

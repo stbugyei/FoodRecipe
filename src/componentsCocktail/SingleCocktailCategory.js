@@ -73,7 +73,7 @@ const SingleCocktailCategory = (props) => {
                 <div className="food-list__card" key={categoryMain[index].idDrink}>
 
                     <div className="food-list__poster">
-                        <img rel="preload" src={drink.strDrinkThumb}  alt={drink.strDrink} style={{ transition: 'all .3s', width: '100%', height: '100%', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }} as="image" />
+                        <img rel="preload" src={drink.strDrinkThumb} alt={drink.strDrink} as="image" />
                     </div>
 
                     <div className="title-discover">
@@ -104,12 +104,13 @@ const SingleCocktailCategory = (props) => {
                 <div className="search-input__wrapper" style={{ backgroundImage: `url(${backGroundImg})` }}>
                     <div className="query"><h1>Collections from {query}</h1></div>
                 </div>
+                <div style={{ padding: '30px' }}>
+                    <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
+                        {drinksWithQueryCard}
+                    </div>
 
-                <div className="food-list__cardwrapper" style={{ marginTop: '20px' }}>
-                    {drinksWithQueryCard}
+                    <button className={paginate > categoryMain.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 12)} style={{ marginTop: '25px 12px' }}>Load More Drinks</button>
                 </div>
-
-                <button className={paginate > categoryMain.length ? "hide" : "loadmore-btn"} onClick={() => setPaginate((prevValue) => prevValue + 12)} style={{ marginTop: '25px 12px' }}>Load More Drinks</button>
             </div>
         </div>
     )
